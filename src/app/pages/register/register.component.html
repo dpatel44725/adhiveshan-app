@@ -1,0 +1,85 @@
+<div class="wrapper wrapper-full-page ">
+  <div class="full-page register-page section-image" filter-color="black" data-image="./assets/img/bg/jan-sendereks.jpg">
+    <div class="content">
+      <div class="container">
+          <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+            <div class="card card-signup text-center">
+              <div class="card-header ">
+                <h4 class="card-title">Register</h4>
+                <div class="social">
+                  <button class="btn btn-icon btn-round btn-twitter">
+                    <i class="fa fa-twitter"></i>
+                  </button>
+                  <button class="btn btn-icon btn-round btn-dribbble">
+                    <i class="fa fa-dribbble"></i>
+                  </button>
+                  <button class="btn btn-icon btn-round btn-facebook">
+                    <i class="fa fa-facebook-f"></i>
+                  </button>
+                  <p class="card-description"> or be classical </p>
+                </div>
+              </div>
+              <div class="card-body ">
+                <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                  <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-single-02"></i>
+                      </span>
+                    </div>
+                    <!--<input type="text" class="form-control"  (focus)="focus=true" (blur)="focus=false">-->
+                    <input type="text" placeholder="First Name..." formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                      <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </div>
+                  </div>
+                  <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-circle-10"></i>
+                      </span>
+                    </div>
+                    <!--<input type="text" class="form-control" (focus)="focus1=true" (blur)="focus1=false">-->
+                    <input type="text"  placeholder="Last Name..." formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                      <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
+                  </div>
+                  <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-circle-10"></i>
+                      </span>
+                    </div>
+                    <!--<input type="text" placeholder="Last Name..." class="form-control" (focus)="focus1=true" (blur)="focus1=false">-->
+                    <input type="text" placeholder="User Name..." formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">Username is required</div>
+                    </div>
+                  </div>
+                  <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="nc-icon nc-circle-10"></i>
+                      </span>
+                    </div>
+                    <!--<input type="text" placeholder="Last Name..." class="form-control" (focus)="focus1=true" (blur)="focus1=false">-->
+                    <input type="password" placeholder="Password..." formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password is required</div>
+                      <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                  </div>
+                  <div class="card-footer ">
+                    <!--<a href="#pablo" class="btn btn-info btn-round">Get Started</a>-->
+                    <button [disabled]="loading" class="btn btn-info btn-round">Register</button>
+                    <a routerLink="/login" class="btn btn-link">Get Started</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
