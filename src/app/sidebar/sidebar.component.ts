@@ -15,7 +15,7 @@ export interface ChildrenItems {
     title: string;
     ab: string;
     type?: string;
-}
+} 
 
 //Menu Items
 export const ROUTES: RouteInfo[] = [{
@@ -23,6 +23,14 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Dashboard',
         type: 'link',
         icontype: 'nc-icon nc-bank'
+    },{
+    path: '/spardha',
+        title: 'Spardha',
+        type: 'sub',
+        icontype: 'nc-icon nc-layout-11',
+        children: [
+            {path: 'detail', title: 'Saprdha Detail', ab:'DE'}            
+        ]
     },{
         path: '/components',
         title: 'Components',

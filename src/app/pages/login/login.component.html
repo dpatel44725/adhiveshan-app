@@ -10,7 +10,7 @@
                 <div class="card-header ">
                   <h3 class="header text-center">Login</h3>
                 </div>
-              </div>
+              </div> 
               <div class="card-body ">
                 <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
                   <div class="input-group-prepend">
@@ -18,9 +18,9 @@
                       <i class="nc-icon nc-single-02"></i>
                     </span>
                   </div>
-                  <input title="userName" type="text" formControlName="username" class="form-control" placeholder="First Name..." (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Username is required</div>
+                  <input title="mobile" type="text" formControlName="mobile" class="form-control" placeholder="First Name..." (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
+                  <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
+                    <div *ngIf="f.mobile.errors.required">mobile is required</div>
                   </div>
                 </div>
                 <div class="input-group"  [ngClass]="{'input-group-focus':focus1===true}">

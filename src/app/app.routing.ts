@@ -10,7 +10,7 @@ export const AppRoutes: Routes = [{
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-}, {
+}, { 
     path: '',
     component: AdminLayoutComponent,
     children: [{
@@ -25,6 +25,16 @@ export const AppRoutes: Routes = [{
         canActivate: [AuthGuard],
         loadChildren: './forms/forms.module#Forms'
     }, {
+        path: 'tables',
+        canActivate: [AuthGuard],
+        loadChildren: './tables/tables.module#TablesModule'
+    }, 
+    {
+        path: 'spardha',
+        canActivate: [AuthGuard],
+        loadChildren: './spardha/spardha.module#SpardhaModule'
+    },
+    {
         path: 'tables',
         canActivate: [AuthGuard],
         loadChildren: './tables/tables.module#TablesModule'

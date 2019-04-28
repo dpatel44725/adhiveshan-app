@@ -1,0 +1,145 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Spardha List</h4>
+        </div >
+        <form class="form-horizontal">
+          <div class="row">
+        
+                              <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class=" col-form-label">Spardha Name</label>
+                  <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaDate($event.target.value)">
+                    <option value="0">Select Spardha</option>
+                     <option [value]="spardha.slot_spardha" *ngFor="let spardha of spardhaUniqueName.spardhas" >  {{spardha.slot_spardha}}</option>
+                  </select>
+                              </div>
+                              <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class=" col-form-label">Spardha Date</label>
+                  <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaTime($event.target.value)">
+                    <option value="0">Select Spardha Date</option>
+                     <option [value]="date.slot_date" *ngFor="let date of spardhaDate.dates" >  {{date.slot_date}}</option>
+                  </select>
+                              </div>
+                              <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="col-form-label">Spardha Time</label>
+                  <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaList($event.target.value)">
+                    <option value="0">Select Spardha Time</option>
+                     <option [value]="time.slot_from_time" *ngFor="let time of spardhaTime.times" >  {{time.slot_from_time}}</option>
+                  </select>
+                              </div>
+        </div>
+        </form>
+        <div class="card-body">
+          <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+                            
+                        </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th class="text-center">
+                  No.
+                </th>
+                <th>
+                  Slot ID
+                </th>
+                <th>
+                  Room
+                </th>
+                <th class="text-center">
+                  Place
+                </th>
+                <th class="text-right">
+                  Nirnayak 1
+                </th>
+                <th class="text-right">
+                  Nirnayak 2
+                </th>
+                <th class="text-right">
+                  Actions
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let spardha of spardhaList.spardhas; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{spardha.slot_id}}</td>
+                  <td>{{spardha.slot_room}}</td>
+                  <td>{{spardha.slot_place}}</td>
+                  <td>{{spardha.slot_nirnayak_1}}</td>
+                  <td>{{spardha.slot_nirnayak_2}}</td>
+                  <td class="text-right">
+                    <button type="button" rel="tooltip" class="btn btn-info btn-icon btn-sm " (click)="openModalDialog(spardha.slot_id)"> 
+                      Download
+                    </button>
+                    <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm ">
+                      Submit Marks
+                    </button>
+                    
+                  </td>
+              </tr>
+                
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<!-- modal -->
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <!-- modal-dialog -->
+  <div class="modal-dialog modal-lg" role="document">
+    <!-- modal-content -->
+    <div class="modal-content">
+      <!-- modal-header -->
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="openModalDialog()"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Spardha Details</h4>
+      </div>
+
+      <!-- modal-body -->
+      <div class="modal-body">
+        <div class="row">
+          <h2>Spardha Information</h2>
+          <div class="col-lg-12">
+          <label>Spardha Name:</label>
+          <label>Spardha Date:</label>
+          </div>
+          <div class="col-lg-12">
+          <label>Spardha Name:</label>
+          <label>Spardha Date:</label>
+          </div>
+          <div class="col-lg-12">
+          <label>Spardha Name:</label>
+          <label>Spardha Date:</label>
+          </div>
+          <div class="col-lg-12">
+          <label>Spardha Name:</label>
+          <label>Spardha Date:</label>
+          </div>
+          <div class="col-lg-12">
+          <label>Spardha Name:</label>
+          <label>Spardha Date:</label>
+          </div>
+          <div class="col-lg-12">
+          <label>Spardha Name:</label>
+          <label>Spardha Date:</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- modal-footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>

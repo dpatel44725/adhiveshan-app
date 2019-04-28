@@ -5,7 +5,7 @@ import {AlertService, AuthenticationService} from '../../_services';
 
 declare var $: any;
 
-@Component({
+@Component({ 
     moduleId: module.id,
     selector: 'app-login-cmp',
     templateUrl: './login.component.html'
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
             $('.card').removeClass('card-hidden');
         }, 700);
         this.loginForm = new FormGroup({
-            username: new FormControl('', Validators.required),
+            mobile: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
         });
     }
@@ -73,17 +73,18 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.router.navigateByUrl('/');
-        // this.authenticationService.login(this.f.username.value, this.f.password.value)
-        //     .pipe()
-        //     .subscribe(
-        //         data => {
-        //             this.router.navigate([this.returnUrl]);
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
+        //this.router.navigateByUrl('/');
+         this.authenticationService.login(this.f.mobile.value, this.f.password.value)
+             .pipe()
+             .subscribe(
+                 data => {
+                     alert(data)
+                     this.router.navigateByUrl('/');
+                 },
+                 error => {
+                     this.alertService.error(error);
+                     this.loading = false;
+                 });
     }
     sidebarToggle() {
         const toggleButton = this.toggleButton;

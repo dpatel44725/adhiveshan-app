@@ -7,7 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent }   from './app.component';
-
+import { SpardhaModule }   from './spardha/spardha.module';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { FixedPluginModule } from './shared/fixedplugin/fixedplugin.module';
 import { FooterModule } from './shared/footer/footer.module';
@@ -19,7 +19,7 @@ import {LoginComponent} from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {RegisterComponent} from './pages/register/register.component';
-
+ 
 @NgModule({
     imports:      [
         BrowserModule,
