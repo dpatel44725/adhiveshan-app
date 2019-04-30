@@ -33,4 +33,8 @@ export class AccomodationComponent implements OnInit {
     console.log(this.accomodation);
     console.log(this.balakInfos);
   }
+  selectDate(event,row){
+    row.bal_check_in = new Date();
+    return row;
+  }
 }
