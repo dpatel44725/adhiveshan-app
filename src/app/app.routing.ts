@@ -35,6 +35,10 @@ export const AppRoutes: Routes = [{
         loadChildren: './spardha/spardha.module#SpardhaModule'
     },
     {
+            path: 'accomodation',
+            loadChildren: './accomodation/accomodation.module#AccomodationModule'
+    },
+    {
         path: 'tables',
         canActivate: [AuthGuard],
         loadChildren: './tables/tables.module#TablesModule'

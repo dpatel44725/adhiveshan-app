@@ -1,0 +1,127 @@
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Accomodation</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <label class="col-md-3 col-form-label">Room Id</label>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [(ngModel)]="roomId" placeholder="Room Id">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" style="margin-top: 0;" (click)="searchRoom(roomId)">Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td>Building</td>
+                                        <td class="text-right">
+                                            {{accomodation.acc_building}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Wing</td>
+                                        <td class="text-right">
+                                            {{accomodation.acc_wing}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Floor</td>
+                                        <td class="text-right">
+                                            {{accomodation.acc_floor}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Room No</td>
+                                        <td class="text-right">
+                                            {{accomodation.acc_room_no}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Capacity</td>
+                                        <td class="text-right">
+                                            {{accomodation.acc_max_cap}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Key given to </td>
+                                        <td class="text-right" *ngIf="!accomodation.acc_key_whom_to_given">
+                                            <input type="text" class="form-control" [(ngModel)]="keyGivento" placeholder="Key given to ?">
+                                        </td>
+                                        <td class="text-right" *ngIf="accomodation.acc_key_whom_to_given">
+                                            {{accomodation.acc_key_whom_to_given}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="text-primary">
+                            <th class="text-center">
+                                #
+                            </th>
+                            <th class="text-center">
+                                Check In
+                            </th>
+                            <th>
+                               Name
+                            </th>
+                            <th>
+                                Group Id
+                            </th>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let row of balakInfos; index as i">
+                                <td  class="text-center">{{i+1}}</td>
+                                <td class="text-center">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="row.bal_check_in">
+                                            <span class="form-check-sign"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{row.bal_surname}} {{row.bal_name}} {{row.bal_father}}</td>
+                                <td>{{row.bal_grp_id}}</td>
+                                <!--                            <td>{{row[3]}}</td>-->
+                                <!--                            <td>{{row[4]}}</td>-->
+                                <!--                            <td class="text-right">-->
+                                <!--                                <a href="#" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-heart"></i></a>-->
+                                <!--                                <a href="#" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>-->
+                                <!--                                <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove"><i class="fa fa-times"></i></a>-->
+                                <!--                            </td>-->
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" style="margin-top: 0;" (click)="submitAccomodation()">Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

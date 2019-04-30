@@ -31,6 +31,15 @@ export const ROUTES: RouteInfo[] = [{
         children: [
             {path: 'detail', title: 'Saprdha Detail', ab:'DE'}            
         ]
+    },
+    {
+        path: '/accomodation',
+        title: 'Accomodation',
+        type: 'sub',
+        icontype: 'nc-icon nc-layout-11',
+        children: [
+            {path: 'accomodation', title: 'Accomodation', ab:'AD'}
+        ]
     },{
         path: '/components',
         title: 'Components',
