@@ -4,7 +4,9 @@ import {AdminLayoutComponent} from './layouts/admin/admin-layout.component';
 import {AuthLayoutComponent} from './layouts/auth/auth-layout.component';
 import {AuthGuard} from './_guards';
 import {LoginComponent} from './pages/login/login.component';
-import {RegisterComponent} from './pages/register/register.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component'
+
 
 export const AppRoutes: Routes = [{
     path: '',
@@ -33,7 +35,8 @@ export const AppRoutes: Routes = [{
         path: 'spardha',
         canActivate: [AuthGuard],
         loadChildren: './spardha/spardha.module#SpardhaModule'
-    },
+        },
+        { path: 'spardhaDetail/:id', component: SpardhaDetail },
     {
             path: 'accomodation',
             loadChildren: './accomodation/accomodation.module#AccomodationModule'

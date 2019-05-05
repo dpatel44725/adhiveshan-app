@@ -18,7 +18,8 @@ import { AppRoutes } from './app.routing';
 import {LoginComponent} from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
-import {RegisterComponent} from './pages/register/register.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component'
  
 @NgModule({
     imports:      [
@@ -40,7 +41,8 @@ import {RegisterComponent} from './pages/register/register.component';
         AdminLayoutComponent,
         AuthLayoutComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        SpardhaDetail
     ],
     bootstrap:    [ AppComponent ]
 })
