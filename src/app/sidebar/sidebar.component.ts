@@ -34,11 +34,11 @@ export const ROUTES: RouteInfo[] = [{
     },
     {
         path: '/accomodation',
-        title: 'Accomodation',
+        title: 'Accommodation',
         type: 'sub',
         icontype: 'nc-icon nc-layout-11',
         children: [
-            {path: 'accomodation', title: 'Accomodation', ab:'AD'}
+            {path: 'accomodation', title: 'Accommodation', ab:'AD'}
         ]
     },{
         path: '/components',

@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AccomodationComponent } from './accomodation/accomodation.component';
 import {AccomodationRoutes} from './accomodation.routing'
 import {RouterModule} from '@angular/router';
-import {ReactiveFormsModule,FormsModule} from '@angular/forms';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {CalendarModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import {ReactiveFormsModule,FormsModule} from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild(AccomodationRoutes),
+    CalendarModule
   ],
   declarations: [AccomodationComponent]
 })

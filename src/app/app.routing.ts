@@ -28,8 +28,7 @@ export const AppRoutes: Routes = [{
         path: 'tables',
         canActivate: [AuthGuard],
         loadChildren: './tables/tables.module#TablesModule'
-    }, 
-    {
+    }, {
         path: 'spardha',
         canActivate: [AuthGuard],
         loadChildren: './spardha/spardha.module#SpardhaModule'

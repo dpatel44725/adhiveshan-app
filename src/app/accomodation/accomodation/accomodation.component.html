@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Accomodation</h4>
+                    <h4 class="card-title">Accommodation</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -56,9 +56,10 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Key given to </td>
+                                        <td>Key given to</td>
                                         <td class="text-right" *ngIf="!accomodation.acc_key_whom_to_given">
-                                            <input type="text" class="form-control" [(ngModel)]="keyGivento" placeholder="Key given to ?">
+                                            <input type="text" class="form-control" [(ngModel)]="keyGivento"
+                                                   placeholder="Key given to ?">
                                         </td>
                                         <td class="text-right" *ngIf="accomodation.acc_key_whom_to_given">
                                             {{accomodation.acc_key_whom_to_given}}
@@ -81,7 +82,7 @@
                                 Check In
                             </th>
                             <th>
-                               Name
+                                Name
                             </th>
                             <th>
                                 Group Id
@@ -89,25 +90,18 @@
                             </thead>
                             <tbody>
                             <tr *ngFor="let row of balakInfos; index as i">
-                                <td  class="text-center">{{i+1}}</td>
+                                <td class="text-center">{{i + 1}}</td>
                                 <td class="text-center">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value="row.bal_check_in ? true : false" (change)="selectDate($event,row)">
+                                            <input class="form-check-input" [checked]="row.checkedIn" type="checkbox"
+                                                   (change)="selectDate($event,row)">
                                             <span class="form-check-sign"></span>
                                         </label>
                                     </div>
                                 </td>
                                 <td>{{row.bal_surname}} {{row.bal_name}} {{row.bal_father}}</td>
                                 <td>{{row.bal_grp_id}}</td>
-                                <!--                            <td>{{row[3]}}</td>-->
-                                <!--                            <td>{{row[4]}}</td>-->
-                                <!--                            <td class="text-right">-->
-                                <!--                                <a href="#" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-heart"></i></a>-->
-                                <!--                                <a href="#" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>-->
-                                <!--                                <a href="#" class="btn btn-danger btn-link btn-icon btn-sm remove"><i class="fa fa-times"></i></a>-->
-                                <!--                            </td>-->
-
                             </tr>
                             </tbody>
                         </table>
@@ -115,7 +109,18 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-8">
+                            <h4 class="card-title">Checkout Time</h4>
+                            <p-calendar [(ngModel)]="checkOut"
+                                        [showTime]="true" [showSeconds]="true"
+                                        dateFormat="yy-mm-dd" appendTo="body" dataType="string" [showIcon]="true"
+                                        [showButtonBar]="true"></p-calendar>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
                             <button class="btn btn-primary" style="margin-top: 0;" (click)="submitAccomodation()">Submit
                             </button>
                         </div>
