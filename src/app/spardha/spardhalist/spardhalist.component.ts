@@ -1,6 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import * as jspdf from 'jspdf';
+
+import html2canvas from 'html2canvas'; 
 import {AlertService, SpardhaService} from '../../_services';
 declare var $:any;
 
@@ -20,8 +23,25 @@ spardhaList:any=[];
 selectedSaprdha:string="";
 selectedDate:string="";
 selectedTime:string="";
-closeResult: string;
- display='none'; //default Variable
+    closeResult: string;
+    spardhaBalakList: any = {
+        spardha_info: {
+            slot_id: "",
+            slot_spardha: "",
+            slot_date: "",
+            slot_from_time: "",
+            slot_to_time: "",
+            slot_place: "",
+            slot_room: "",
+            slot_nirnayak_1: "",
+            slot_nirnayak_2: "",
+            slot_marks_verified: "",
+            slot_marks_verified_by: "",
+            slot_marks_submitted: ""
+        }
+    }
+    display = 'none'; //default Variable
+    
 constructor(
                 private router: Router,
                 private spardhaservice: SpardhaService,
@@ -30,6 +50,7 @@ constructor(
                 ) {
         
     }
+    @ViewChild('contentToConvert') contentToConvert: ElementRef;
     ngOnInit(){
         this.spardhaservice.getUniqueSaprdhaName()
              .pipe()
@@ -115,9 +136,61 @@ _getSpardhaList(spardhatime){
     }
      openModalDialog(slot_id){
          console.log(slot_id)
-    this.display='block'; //Set block css
- }
+         this.spardhaservice.getSpardhaBalakList(slot_id)
+             .pipe()
+             .subscribe(
+                 data => {
+                     console.log(data)
+                     this.spardhaBalakList = data;
+                     this.display = 'block';
+                     console.log(this.spardhaBalakList)
+                     setTimeout(function () {
+                         this.captureScreen();
+                     }.bind(this), 2000);
+                     /// this.router.navigateByUrl('/');
+                 },
+                 error => {
+                     this.alertService.error(error);
+                     this.loading = false;
+                 });
+     //Set block css
+    }
+    downloadPdf() {
+        
+        const doc = new jspdf();
+        const specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
 
+        const content = this.contentToConvert.nativeElement;
+
+        doc.fromHTML(content.innerHTML, 15, 15, {
+            'width': 190,
+            'elementHandlers': specialElementHandlers
+        });
+
+        doc.save('asdfghj' + '.pdf');
+    }
+ captureScreen() {
+     var data = document.getElementById('reportContent');
+     this.display = 'none';
+        html2canvas(data).then(canvas => {
+            // Few necessary setting options  
+            var imgWidth = 208;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+
+            const contentDataURL = canvas.toDataURL('image/png')
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+            pdf.save(this.spardhaBalakList.spardha_info.slot_spardha + 'Detail.pdf'); 
+
+        });
+    }
  closeModalDialog(){
   this.display='none'; //set none css after close dialog
  }
