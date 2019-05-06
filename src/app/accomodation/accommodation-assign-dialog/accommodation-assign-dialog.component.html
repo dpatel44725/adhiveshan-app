@@ -1,0 +1,83 @@
+<mat-toolbar mat-dialog-title>
+  <span>Assign Dialog</span>
+</mat-toolbar>
+<div class="dialog-forms-row">
+  <div class="col-sm-12">
+    <mat-dialog-content>
+      <div class="card-body">
+        <div class="row">
+<!--          <div class="col-md-6">-->
+<!--            <div class="table-responsive">-->
+<!--              <table class="table">-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                  <td>Building</td>-->
+<!--                  <td class="text-right">-->
+<!--                    {{accomodation.acc_building}}-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Wing</td>-->
+<!--                  <td class="text-right">-->
+<!--                    {{accomodation.acc_wing}}-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Floor</td>-->
+<!--                  <td class="text-right">-->
+<!--                    {{accomodation.acc_floor}}-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Room No</td>-->
+<!--                  <td class="text-right">-->
+<!--                    {{accomodation.acc_room_no}}-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td>Capacity</td>-->
+<!--                  <td class="text-right">-->
+<!--                    {{accomodation.acc_max_cap}}-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="col-md-12">
+            <p-table #dt [columns]="cols" [value]="balaks">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns">
+                    {{col.header}}
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns">
+                    <ng-container *ngIf="col.field !== '';else action">
+                      {{rowData[col.field]}}
+                    </ng-container>
+                    <ng-template #action>
+                      <button class="btn btn-danger btn-icon btn-sm" (click)="removeBalak(rowData)">
+                        <i class="fa fa-times"></i>
+                      </button>
+                    </ng-template>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button class="float-right" (click)="onSubmit()" type="submit">
+        Submit
+      </button>
+      <button mat-raised-button type="button" mat-dialog-close>Close
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

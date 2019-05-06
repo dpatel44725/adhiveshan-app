@@ -29,4 +29,39 @@ export class AccomodationService {
             acc_key_whom_to_given: keyGivenToWhom
         });
     }
+
+    getAllAccommodation() {
+        return this.http.post(`${environment.apiUrl}/get_accommodation_data`, {
+            security_token: this.currentUser.security_token});
+    }
+
+    getAllBalaksAssignedToRoom(roomId){
+        return this.http.post(`${environment.apiUrl}/get_accommodation_balaks`, {
+            security_token: this.currentUser.security_token,
+            acc_id: roomId
+        });
+    }
+
+    getBalaksByGroupId(grpId) {
+        return this.http.post(`${environment.apiUrl}/fetch_group_info`, {
+            security_token: this.currentUser.security_token,
+            grp_id: grpId
+        });
+    }
+
+    getBalakByBalakId(balId) {
+        return this.http.post(`${environment.apiUrl}/fetch_balak_info`, {
+            security_token: this.currentUser.security_token,
+            bal_id: balId
+        });
+    }
+
+    addRemoveBalakFromRoom(accId, balId, action){
+        return this.http.post(`${environment.apiUrl}/assign_remove_accommodation_to_balak`, {
+            security_token: this.currentUser.security_token,
+            acc_id: accId,
+            bal_id: balId,
+            action: action
+        });
+    }
 }

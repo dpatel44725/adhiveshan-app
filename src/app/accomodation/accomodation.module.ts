@@ -5,15 +5,26 @@ import {AccomodationRoutes} from './accomodation.routing'
 import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {CalendarModule} from 'primeng/primeng';
+import { AccommodationInfoComponent } from './accommodation-info/accommodation-info.component';
+import {TableModule} from 'primeng/table';
+import {MatButtonModule, MatDialogModule, MatIconModule, MatToolbarModule} from '@angular/material';
+import { AccommodationAssignDialogComponent } from './accommodation-assign-dialog/accommodation-assign-dialog.component';
+import { SearchBalakComponent } from './search-balak/search-balak.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RouterModule.forChild(AccomodationRoutes),
-    CalendarModule
-  ],
-  declarations: [AccomodationComponent]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
+        RouterModule.forChild(AccomodationRoutes),
+        CalendarModule,
+        TableModule,
+        MatDialogModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule
+    ],
+  declarations: [AccomodationComponent, AccommodationInfoComponent, AccommodationAssignDialogComponent, SearchBalakComponent],
+    entryComponents: [AccommodationAssignDialogComponent, SearchBalakComponent]
 })
 export class AccomodationModule { }

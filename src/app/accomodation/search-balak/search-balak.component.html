@@ -1,0 +1,64 @@
+<mat-toolbar mat-dialog-title>
+  <span>Search Balak</span>
+</mat-toolbar>
+<div class="dialog-forms-row">
+  <div class="col-sm-12">
+    <mat-dialog-content>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 col-sm-3">
+            <select class="selectpicker" data-style="btn btn-primary btn-round" title="Single Select" [(ngModel)]="type">
+              <option value="group">Group</option>
+              <option value="balak">Balak</option>
+            </select>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="id" placeholder="Room Id">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary" style="margin-top: 0;" (click)="searchBalak(id)">Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p-table #dt [columns]="cols" [value]="balaks">
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns">
+                    {{col.header}}
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns">
+                    <ng-container *ngIf="col.field !== '';else action">
+                      {{rowData[col.field]}}
+                    </ng-container>
+                    <ng-template #action>
+                      <button class="btn btn-success btn-link btn-icon btn-sm remove" (click)="addBalak(rowData)">
+                        <i class="fa fa-plus"></i>
+                      </button>
+                    </ng-template>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-raised-button class="float-right" (click)="onSubmit()" type="submit">
+        Submit
+      </button>
+      <button mat-raised-button type="button" mat-dialog-close>Close
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>

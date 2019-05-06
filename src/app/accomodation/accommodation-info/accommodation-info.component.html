@@ -1,0 +1,50 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Accommodation Info</h4>
+        </div>
+        <div class="card-body">
+          <div class="toolbar">
+            <!--        Here you can write extra buttons/actions for the toolbar              -->
+          </div>
+          <p-table #dt [columns]="cols" [value]="accommodationData">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                </th>
+              </tr>
+              <tr>
+                <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                  <div class="form-group">
+                    <input class="form-control" *ngSwitchCase="'total_allocated'" type="text"
+                           (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                  </div>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr>
+                <td *ngFor="let col of columns">
+                  <ng-container *ngIf="col.field !== '';else action">
+                    {{rowData[col.field]}}
+                  </ng-container>
+                  <ng-template #action>
+                    <button class="btn btn-info btn-icon btn-sm" (click)="openAssignDialog(rowData)">
+                     <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-success btn-icon btn-sm" (click)="openSearchDialog(rowData)">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </ng-template>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
