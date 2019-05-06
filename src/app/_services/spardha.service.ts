@@ -27,4 +27,10 @@ export class SpardhaService {
     getSpardhaList(spardhaName, spardhatime, spardhaTime){
         return this.http.post(`${environment.apiUrl}/get_spardha_lists`, {security_token:this.currentUser.security_token, spardha_name:spardhaName, spardha_date:spardhatime, spardha_time:spardhaTime});
     }
+    getSpardhaBalakList(spardhaId) {
+        return this.http.post(`${environment.apiUrl}/get_spardha_balak_list`, { security_token: this.currentUser.security_token, spardha_id: spardhaId});
+    }
+    submitSpardhaBalakMarks(submitMarksObj) {
+        return this.http.post(`${environment.apiUrl}/submit_balaks_spardha_marks`, { security_token: this.currentUser.security_token, spardha_id:submitMarksObj.spardha_id, marks:submitMarksObj.marks}); 
+    }
 }
