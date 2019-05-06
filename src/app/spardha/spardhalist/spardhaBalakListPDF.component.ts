@@ -93,10 +93,11 @@ export class SpardhaDetail implements OnInit {
         var postMarks:any = {};
         postMarks.spardha_id = this.spardhaBalakList.spardha_info.slot_id;
         postMarks.marks = []
-
+        var marks:any = {}
         for (let i = 0; i < this.spardhaBalakList.spardha_balaks.length; i++) {
             if (this.spardhaBalakList.spardha_balaks[i].mark_marks > 0 && this.spardhaBalakList.spardha_balaks[i].mark_marks < 101) {
-                postMarks.marks.push({ bal_id: this.spardhaBalakList.spardha_balaks[i].bal_id,marks: this.spardhaBalakList.spardha_balaks[i].mark_marks })
+               // postMarks.marks.push({ bal_id: this.spardhaBalakList.spardha_balaks[i].bal_id,marks: this.spardhaBalakList.spardha_balaks[i].mark_marks })
+                marks[this.spardhaBalakList.spardha_balaks[i].bal_id,marks]=this.spardhaBalakList.spardha_balaks[i].mark_marks;
             }
         }
         console.log(postMarks)
