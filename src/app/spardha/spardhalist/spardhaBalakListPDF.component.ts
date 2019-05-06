@@ -30,7 +30,7 @@ export class SpardhaDetail implements OnInit {
             slot_place: '',
             slot_room: '',
             slot_nirnayak_1: '',
-            slot_nirnayak_2: "Devesh",
+            slot_nirnayak_2: '',
             slot_marks_verified: '',
             slot_marks_verified_by: '',
             slot_marks_submitted: ''

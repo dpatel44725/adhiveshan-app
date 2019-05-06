@@ -85,7 +85,7 @@
 
                             </tbody>
                         </table>
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="saveMarks()">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="saveMarks()" *ngIf="!showSave">
                             Save Marks
                         </button>
                     </div>
