@@ -30,4 +30,7 @@ export class SpardhaService {
     getSpardhaBalakList(spardhaId) {
         return this.http.post(`${environment.apiUrl}/get_spardha_balak_list`, { security_token: this.currentUser.security_token, spardha_id: spardhaId});
     }
+    submitSpardhaBalakMarks(submitMarks) {
+        return this.http.post(`${environment.apiUrl}/submit_balaks_spardha_marks`, { security_token: this.currentUser.security_token, submitMarks});
+    }
 }
