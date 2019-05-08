@@ -23,7 +23,14 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Dashboard',
         type: 'link',
         icontype: 'nc-icon nc-bank'
-    }, {
+        }, {
+        path: '/topRenkars',
+        title: 'topRenkars',
+                type: 'link',
+                icontype: 'nc-icon nc-bank'
+            },
+
+    {
     path: '/spardha',
         title: 'Spardha',
         type: 'sub',

@@ -33,4 +33,7 @@ export class SpardhaService {
     submitSpardhaBalakMarks(submitMarksObj) {
         return this.http.post(`${environment.apiUrl}/submit_balaks_spardha_marks`, { security_token: this.currentUser.security_token, spardha_id:submitMarksObj.spardha_id, marks:submitMarksObj.marks}); 
     }
+    getSpardhaMarks(getMarkReqObj) {
+        return this.http.post(`${environment.apiUrl}/get_spardha_marks`, { security_token: this.currentUser.security_token, spardha_id: getMarkReqObj.spardha_id, marks: getMarkReqObj.marks });
+    }
 }

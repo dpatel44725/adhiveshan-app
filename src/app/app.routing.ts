@@ -5,7 +5,8 @@ import {AuthLayoutComponent} from './layouts/auth/auth-layout.component';
 import {AuthGuard} from './_guards';
 import {LoginComponent} from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component'
+import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component';
+import { TopRankers } from './spardha/topRankers/toprankers.component';
 
 
 export const AppRoutes: Routes = [{
@@ -36,6 +37,7 @@ export const AppRoutes: Routes = [{
         loadChildren: './spardha/spardha.module#SpardhaModule'
         },
         { path: 'spardhaDetail/:id', component: SpardhaDetail },
+        { path: 'topRenkars', component: TopRankers },
     {
             path: 'accomodation',
             loadChildren: './accomodation/accomodation.module#AccomodationModule'

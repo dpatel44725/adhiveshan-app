@@ -19,7 +19,9 @@ import {LoginComponent} from './pages/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import { RegisterComponent } from './pages/register/register.component';
-import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component'
+import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component';
+import { TopRankers } from './spardha/topRankers/toprankers.component';
+
 
 @NgModule({
     imports:      [
@@ -42,7 +44,8 @@ import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.compone
         AuthLayoutComponent,
         LoginComponent,
         RegisterComponent,
-        SpardhaDetail
+        SpardhaDetail,
+        TopRankers
     ],
     bootstrap:    [ AppComponent ]
 })
