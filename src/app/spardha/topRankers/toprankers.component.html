@@ -10,14 +10,14 @@
 
                         <div class="col-lg-4 col-md-6 col-sm-3">
                             <label class=" col-form-label">Spardha Name</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaDate($event.target.value)">
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_setSpardhaName($event.target.value)">
                                 <option value="0">Select Spardha</option>
                                 <option [value]="spardha.slot_spardha" *ngFor="let spardha of spardhaUniqueName.spardhas">  {{spardha.slot_spardha}}</option>
                             </select>
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-3">
                             <label class=" col-form-label">Marks Range</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Top Range">
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Top Range" (change)="_setTop_record($event.target.value)">
                                 <option [value]="topRange" *ngFor="let topRange of topRangegroup">  {{topRange}}</option>
                             </select>
                         </div>
@@ -73,21 +73,20 @@
                             
                             </thead>
                             <tbody>
-                                <tr *ngFor="let mark of Marks; let i = index">
+                                <tr *ngFor="let mark of topRankMarks.marks; let i = index">
                                     <td>{{i+1}}</td>
                                     <td>{{mark.mark_bal_id}}</td>
                                     <td>{{mark.bal_name}} {{mark.bal_surname}}</td>
                                     <td>{{mark.mark_marks}}</td>
                                     
                                     <td class="text-right">
-                                        <button type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="openModalDialog(spardha.slot_id)">
-                                            Download
+                                        <button *ngIf="showAdd(mark.mark_selected4final)" type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="selectRomove(mark.mark_id, 'select')">
+                                            Select
                                         </button>
-                                        <!--<button type="button" rel="tooltip" class="btn btn-primary btn-submit-mark " [routerLink]="spardhaDetail/{{spardha.slot_id}}">
+                                        <button *ngIf="showRemove(mark.mark_selected4final)" type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="selectRomove(mark.mark_id, 'remove')">
+                                            Remove
+                                        </button>
 
-                                            Submit Marks
-                                        </button>-->
-                                        <a  class="btn btn-primary btn-submit-mark " [routerLink]="['/spardhaDetail',2]">Submit Marks</a>
 
                                     </td>
                                 </tr>

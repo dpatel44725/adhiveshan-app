@@ -44,7 +44,7 @@ export class TopRankers implements OnInit{
             slot_marks_submitted: ""
         }
     }
-    Marks: any = [];
+    topRankMarks: any = [];
     topRangegroup: any = ['10', '20', '30', '40', '50']
     minMaxRange:any = ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100']
     display = 'none'; //default Variable
@@ -74,23 +74,23 @@ export class TopRankers implements OnInit{
             
         });
 
-        //this.searchMarkesForm.controls['minMarks'].valueChanges.subscribe(value => {
-        //    console.log(value);
-        //});
+        this.searchMarkesForm.controls['minMarks'].valueChanges.subscribe(value => {
+            console.log(value);
+        });
        
-        //this.spardhaservice.getUniqueSaprdhaName()
-        //     .pipe()
-        //     .subscribe(
-        //         data => {
-        //             console.log(data)
-        //             this.spardhaUniqueName=data;
-        //             console.log(this.spardhaUniqueName.spardhas)
-        //            /// this.router.navigateByUrl('/');
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
+        this.spardhaservice.getUniqueSaprdhaName()
+             .pipe()
+             .subscribe(
+                 data => {
+                     console.log(data)
+                     this.spardhaUniqueName=data;
+                     console.log(this.spardhaUniqueName.spardhas)
+                    /// this.router.navigateByUrl('/');
+                 },
+                 error => {
+                     this.alertService.error(error);
+                     this.loading = false;
+                 });
     }
     get f() { return this.searchMarkesForm.controls; };
     get minMarks() {
@@ -100,7 +100,12 @@ export class TopRankers implements OnInit{
     get maxMarks() {
         return this.searchMarkesForm.get('maxMarks') as FormControl;
     }
-    
+    _setSpardhaName(spardhaName) {
+        this.markReqObj.spardha_name = spardhaName;
+    }
+    _setTop_record(top_record) {
+        this.markReqObj.top_record = top_record;
+    }
     _getSpardhaDate(spardhasname){
         this.selectedSaprdha=spardhasname;
         //this.spardhaservice.getSpardhaDate(spardhasname)
@@ -117,7 +122,37 @@ export class TopRankers implements OnInit{
         //             this.loading = false;
         //         });
     }
-   
+    showAdd(selectedfor) {
+        if (selectedfor === 'No') {
+            return true;
+        }
+        else return false;
+    }
+    showRemove(selectedfor) {
+        if (selectedfor === 'Yes') {
+            return true;
+        }
+        else return false;
+    }
+    selectRomove(_mark_id,actionName) {
+        let select_remove = {
+            mark_id: _mark_id,
+            action: actionName
+        }
+        this.spardhaservice.select_remove_for_final_adhivation(select_remove)
+             .pipe()
+             .subscribe(
+                 data => {
+                     console.log(data)
+                     //this.spardhaDate=data;
+                     //console.log(this.spardhaDate.dates)
+                    /// this.router.navigateByUrl('/');
+                 },
+                 error => {
+                     this.alertService.error(error);
+                     this.loading = false;
+                 });
+    }
     onSubmit() {
         this.submitted = true;
         let minMarkesValue = this.searchMarkesForm.controls['minMarks'].value;
@@ -130,52 +165,27 @@ export class TopRankers implements OnInit{
             
         }
         /// backend call
-        this.Marks = [
-            {
-                "mark_id": "2",
-                "mark_bal_id": "2212",
-                "mark_spardha": "1",
-                "mark_marks": "80",
-                "mark_adhivation_type": "Semi",
-                "mark_selected4final": "No",
-                "mark_remark": null,
-                "slot_spardha": "Pravachan",
-                "slot_date": "2019-05-01",
-                "slot_from_time": "12:10:00",
-                "slot_to_time": "14:10:00",
-                "slot_place": "Vidhyamandir School",
-                "slot_room": "1",
-                "bal_surname": "Patel",
-                "bal_name": "Akshar",
-                "bal_father": "Dineshbhai",
-                "bal_phone": "9428518750"
-            },
-            {
-                "mark_id": "1",
-                "mark_bal_id": "2211",
-                "mark_spardha": "1",
-                "mark_marks": "50",
-                "mark_adhivation_type": "Semi",
-                "mark_selected4final": "No",
-                "mark_remark": null,
-                "slot_spardha": "Pravachan",
-                "slot_date": "2019-05-01",
-                "slot_from_time": "12:10:00",
-                "slot_to_time": "14:10:00",
-                "slot_place": "Vidhyamandir School",
-                "slot_room": "1",
-                "bal_surname": "Jethva",
-                "bal_name": "Saral",
-                "bal_father": "Harikrishnabhai",
-                "bal_phone": "9998816300"
-            }
-        ]
+        
         
         
         if (this.searchMarkesForm.invalid) {
             return;
         }
-
+        this.markReqObj.min_marks = minMarkesValue;
+        this.markReqObj.max_marks = maxMarkesValue;
+        this.spardhaservice.getSpardhaMarks(this.markReqObj)
+            .pipe()
+            .subscribe(
+                data => {
+                    console.log(data)
+                    this.topRankMarks = data;
+                    console.log(this.spardhaUniqueName.spardhas)
+                    /// this.router.navigateByUrl('/');
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
         
     }
     
