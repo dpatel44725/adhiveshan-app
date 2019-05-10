@@ -69,8 +69,8 @@ export class TopRankers implements OnInit{
     @ViewChild('contentToConvert') contentToConvert: ElementRef;
     ngOnInit() {
         this.searchMarkesForm = new FormGroup({
-            minMarks: new FormControl('', [Validators.required, Validators.min(3), Validators.max(100) ] ),
-            maxMarks: new FormControl('', [Validators.required, Validators.min(3), Validators.max(100)])
+            minMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100) ] ),
+            maxMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)])
             
         });
 

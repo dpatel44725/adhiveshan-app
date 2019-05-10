@@ -59,16 +59,16 @@ export class SpardhaDetail implements OnInit {
             .subscribe(
                 data => {
                    this.spardhaBalakList = data;
-                    if (this.spardhaBalakList.spardha.slot_marks_verified == "No") {
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "No") {
                         this.showSave = true;
 
                     }
-                    if (this.spardhaBalakList.spardha.slot_marks_verified == "Yes") {
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
                         this.showSubmited = true;
                         this.showSave = false;
                         this.showVerifiedBy = true;
                     }
-                    if (this.spardhaBalakList.spardha.slot_marks_verified == "Yes" && this.spardhaBalakList.spardha.slot_marks_verified == "Yes") {
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes" && this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
                         this.showSubmited = false;
                         this.showSave = false;
                         this.showVerifiedBy = true;
