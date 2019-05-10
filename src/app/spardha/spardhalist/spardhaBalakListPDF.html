@@ -1,99 +1,114 @@
-﻿<div class="main-content" id="reportContent">
+<div class="main-content">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Spardha: {{spardhaBalakList.spardha_info.slot_spardha}}</h4>
+            <div class="card" id="reportContent">
+                
+                    <div class="card-header">
+                        <h4 class="card-title">Spardha: {{spardhaBalakList.spardha_info.slot_spardha}}</h4>
+                    </div>
+                    <form class="form-horizontal card-body">
+                        <div class="row border">
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Spardha Date: </label>
+                                <label>{{spardhaBalakList.spardha_info.slot_date}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Spardha Time: </label>
+                                <label>From {{spardhaBalakList.spardha_info.slot_from_time}} To {{spardhaBalakList.spardha_info.slot_from_time}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Spardha Nirnayak 1: </label>
+                                <label>{{spardhaBalakList.spardha_info.slot_nirnayak_1}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Spardha Nirnayak 2: </label>
+                                <label>{{spardhaBalakList.spardha_info.slot_nirnayak_2}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Marks Verified: </label>
+                                <label>{{spardhaBalakList.spardha_info.slot_marks_verified}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Marks Verified By: </label>
+                                <label>{{spardhaBalakList.spardha_info.slot_marks_verified_by}}</label>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-3">
+                                <label class="font-weight-bold px-2">Marks Submited: </label>k
+                                <label>{{spardhaBalakList.spardha_info.slot_marks_submitted}}</label>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th class="">
+                                            No.
+                                        </th>
+                                        <th>
+                                            Balak ID
+                                        </th>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th class="">
+                                            Marks
+                                        </th>
+                                        <th class="">
+                                            Region
+                                        </th>
+                                        <th class="">
+                                            Remark
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let spardha_balak of spardhaBalakList.spardha_balaks; let i = index">
+                                        <td class="padding-75rem">{{i+1}}</td>
+                                        <td>{{spardha_balak.bal_id}}</td>
+                                        <td>{{spardha_balak.bal_name}}  {{spardha_balak.bal_surname}}</td>
+                                        <td>
+                                            <input [(ngModel)]="spardha_balak.mark_marks" type="number" #ctrl="ngModel" required max="100" min="0">
+
+                                        </td>
+                                        <td>{{spardha_balak.bal_region}}</td>
+                                        <td>{{spardha_balak.mark_remark}}</td>
+
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
                 </div>
-                <form class="form-horizontal card-body">
-                    <div class="row border">
-
-                        
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Spardha Date: </label>
-                            <label >{{spardhaBalakList.spardha_info.slot_date}}</label>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Spardha Time: </label>
-                            <label>From {{spardhaBalakList.spardha_info.slot_from_time}} To {{spardhaBalakList.spardha_info.slot_from_time}}</label>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Spardha Nirnayak 1: </label>
-                            <label>{{spardhaBalakList.spardha_info.slot_nirnayak_1}}</label>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Spardha Nirnayak 2: </label>
-                            <label>{{spardhaBalakList.spardha_info.slot_nirnayak_2}}</label>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Marks Verified: </label>
-                            <label>{{spardhaBalakList.spardha_info.slot_marks_verified}}</label>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Marks Verified By: </label>
-                            <label>{{spardhaBalakList.spardha_info.slot_marks_verified_by}}</label>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class="font-weight-bold px-2">Marks Submited: </label>
-                            <label>{{spardhaBalakList.spardha_info.slot_marks_submitted}}</label>
-                        </div>
-                    </div>
-                </form>
-                <div class="card-body">
-                    <div class="toolbar">
-                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-primary">
-                                <tr>
-                                    <th class="">
-                                        No.
-                                    </th>
-                                    <th>
-                                        Balak ID
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th class="">
-                                        Marks
-                                    </th>
-                                    <th class="">
-                                        Region
-                                    </th>
-                                    <th class="">
-                                        Remark
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let spardha_balak of spardhaBalakList.spardha_balaks; let i = index">
-                                    <td class="padding-75rem">{{i+1}}</td>
-                                    <td>{{spardha_balak.bal_id}}</td>
-                                    <td>{{spardha_balak.bal_name}}  {{spardha_balak.bal_surname}}</td>
-                                    <td>
-                                        <input [(ngModel)]="spardha_balak.mark_marks" type="number" #ctrl="ngModel" required max="100" min="0">
-
-                                    </td>
-                                    <td>{{spardha_balak.bal_region}}</td>
-                                    <td>{{spardha_balak.mark_remark}}</td>
-
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="saveMarks()" *ngIf="!showSave">
+                <div class="card">
+                    <div class="clearfix px-3">
+                        <button type="button" rel="tooltip" class="btn btn-primary float-left " (click)="saveMarks()" *ngIf="showSave">
                             Save Marks
                         </button>
+                        <button type="button" rel="tooltip" class="btn btn-primary  float-left " (click)="saveMarks()" *ngIf="showSubmited">
+                            Submit
+                        </button>
+                        <label class="col-sm-6 col-form-label pt-3 font-weight-bold" *ngIf="showVerifiedBy">Submited By: {{spardhaBalakList.spardha_info.slot_marks_verified_by}} </label>
+                        <button type="button" rel="tooltip" class="btn btn-primary float-right " (click)="captureScreen()" *ngIf="showDownload">
+                            Download
+                        </button>
                     </div>
+
                 </div>
-            </div>
+            
         </div>
 
 
     </div>
 </div>
-
