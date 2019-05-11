@@ -37,7 +37,10 @@ export class SpardhaDetail implements OnInit {
         },
         spardha_balaks: []
     }
-    showSave: boolean = false;
+    showSave: boolean = true;
+    showSubmited: boolean = false;
+    showVerifiedBy: boolean = false;
+    showDownload: boolean = false;
     display = 'none'; //default Variable
     constructor(
         private router: Router,
@@ -56,12 +59,23 @@ export class SpardhaDetail implements OnInit {
             .subscribe(
                 data => {
                    this.spardhaBalakList = data;
-                    if (this.spardhaBalakList.spardha_info.slot_marks_submitted="Yes") {
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "No") {
                         this.showSave = true;
 
                     }
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
+                        this.showSubmited = true;
+                        this.showSave = false;
+                        this.showVerifiedBy = true;
+                    }
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes" && this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
+                        this.showSubmited = false;
+                        this.showSave = false;
+                        this.showVerifiedBy = true;
+                    }
                     this.display = 'block';
                     console.log(this.spardhaBalakList)
+                    this.showDownload = true;
                 },
                 error => {
                     this.alertService.error(error);
@@ -92,6 +106,25 @@ export class SpardhaDetail implements OnInit {
                 });
     }
 
+    captureScreen() {
+        
+        var data = document.getElementById('reportContent');
+        this.display = 'none';
+        html2canvas(data).then(canvas => {
+            // Few necessary setting options  
+            var imgWidth = 208;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+
+            const contentDataURL = canvas.toDataURL('image/png')
+            let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+            var position = 0;
+            pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+            pdf.save(this.spardhaBalakList.spardha_info.slot_spardha + 'Detail.pdf');
+            
+        });
+    }
     ngAfterViewInit() {
         // Init Tooltips
         $('[rel="tooltip"]').tooltip();

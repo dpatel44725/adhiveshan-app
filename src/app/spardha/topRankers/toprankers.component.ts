@@ -69,8 +69,8 @@ export class TopRankers implements OnInit{
     @ViewChild('contentToConvert') contentToConvert: ElementRef;
     ngOnInit() {
         this.searchMarkesForm = new FormGroup({
-            minMarks: new FormControl('', [Validators.required, Validators.min(3), Validators.max(100) ] ),
-            maxMarks: new FormControl('', [Validators.required, Validators.min(3), Validators.max(100)])
+            minMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100) ] ),
+            maxMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)])
             
         });
 
@@ -134,16 +134,26 @@ export class TopRankers implements OnInit{
         }
         else return false;
     }
-    selectRomove(_mark_id,actionName) {
+    selectRomove(_mark_id,actionName, index){
         let select_remove = {
             mark_id: _mark_id,
             action: actionName
+        }
+        let editField = "";
+        if (actionName === 'select') {
+            editField = 'Yes'
+        }
+        else {
+            editField = 'No'
         }
         this.spardhaservice.select_remove_for_final_adhivation(select_remove)
              .pipe()
              .subscribe(
                  data => {
                      console.log(data)
+                     let updateItem = this.topRankMarks.marks.find(mark => mark.mark_id === _mark_id);
+                     let _index = this.topRankMarks.marks.indexOf(updateItem);
+                     this.topRankMarks.marks[_index].mark_selected4final = editField;
                      //this.spardhaDate=data;
                      //console.log(this.spardhaDate.dates)
                     /// this.router.navigateByUrl('/');
