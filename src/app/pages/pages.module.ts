@@ -17,8 +17,6 @@ import { LoginComponent } from './login/login.component';
         FormsModule
     ],
     declarations: [
-        LoginComponent,
-        RegisterComponent,
         LockComponent
     ]
 })
