@@ -9,7 +9,7 @@
           <div class="toolbar">
             <!--        Here you can write extra buttons/actions for the toolbar              -->
           </div>
-          <p-table #dt [columns]="cols" [value]="accommodationData">
+          <p-table #dt [columns]="cols" [value]="accommodationData" [paginator]="true" [rows]="10">
             <ng-template pTemplate="header" let-columns>
               <tr>
                 <th *ngFor="let col of columns">

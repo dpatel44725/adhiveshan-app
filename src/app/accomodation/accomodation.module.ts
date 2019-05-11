@@ -10,6 +10,7 @@ import {TableModule} from 'primeng/table';
 import {MatButtonModule, MatDialogModule, MatIconModule, MatToolbarModule} from '@angular/material';
 import { AccommodationAssignDialogComponent } from './accommodation-assign-dialog/accommodation-assign-dialog.component';
 import { SearchBalakComponent } from './search-balak/search-balak.component';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import { SearchBalakComponent } from './search-balak/search-balak.component';
         MatDialogModule,
         MatToolbarModule,
         MatIconModule,
-        MatButtonModule
+        MatButtonModule,
+        InputTextModule
     ],
   declarations: [AccomodationComponent, AccommodationInfoComponent, AccommodationAssignDialogComponent, SearchBalakComponent],
     entryComponents: [AccommodationAssignDialogComponent, SearchBalakComponent]
