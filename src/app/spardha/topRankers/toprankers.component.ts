@@ -83,7 +83,21 @@ export class TopRankers implements OnInit{
         //this.searchMarkesForm.controls['minMarks'].valueChanges.subscribe(value => {
         //    console.log(value);
         //});
-       // let tempdata: any = ["Pravachan", "Mukh Path", "Vachnamrut"];
+       // let tempdata: any = {
+       //     "satrus": "pass",
+       //     "spardhas": [
+       //         {
+       //              "slot_spardha":"Pravachan"
+       //         },
+       //     {
+       //             "slot_spardha": "Mukh Path"
+       //         },
+       //         {
+       //             "slot_spardha": "Vachnamrut"
+       //         },
+
+       //         ]
+       //    };
        //this.setSectionsWithData(tempdata);
         
         this.spardhaservice.getUniqueSaprdhaName()
@@ -112,11 +126,11 @@ export class TopRankers implements OnInit{
         });
     }
     setSectionsWithData(data) {
-        this.spardhaList = data;
+        this.spardhaList = data.spardhas;
         this.spardhaUniqueName = [];
         this.spardhaList.forEach((saprdhaName, index) => {
             this.sections = this.searchMarkesForm.get('sections') as FormArray;
-            this.spardhaUniqueName.push({ id: index, sectionName: saprdhaName, marks:[] });
+            this.spardhaUniqueName.push({ id: index, sectionName: saprdhaName.slot_spardha, marks:[] });
             this.sections.push(this.createSections())
             
         });
