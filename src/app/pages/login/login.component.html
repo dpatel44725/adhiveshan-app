@@ -18,7 +18,7 @@
                       <i class="nc-icon nc-single-02"></i>
                     </span>
                   </div>
-                  <input title="mobile" type="text" formControlName="mobile" class="form-control" placeholder="First Name..." (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
+                  <input title="mobile" type="text" formControlName="mobile" class="form-control" placeholder="Mobile Number" (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
                   <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                     <div *ngIf="f.mobile.errors.required">mobile is required</div>
                   </div>
