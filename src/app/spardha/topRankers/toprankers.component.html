@@ -13,8 +13,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-3">
                             <label class=" col-form-label">Spardha Name</label>
                             <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select"  formControlName="spardhaname" >
-                                <option value="0">Select Spardha</option>
-                                <option [value]="spardha" *ngFor="let spardha of spardhaList">  {{spardha}}</option>
+                                <option [value]="spardha.slot_spardha" *ngFor="let spardha of spardhaList">  {{spardha.slot_spardha}}</option>
                             </select>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-3">
