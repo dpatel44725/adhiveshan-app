@@ -36,10 +36,11 @@ export const AppRoutes: Routes = [{
         canActivate: [AuthGuard],
         loadChildren: './spardha/spardha.module#SpardhaModule'
         },
-        { path: 'spardhaDetail/:id', component: SpardhaDetail },
-        { path: 'topRenkars', component: TopRankers },
+        { path: 'spardhaDetail/:id', component: SpardhaDetail, canActivate: [AuthGuard]},
+        { path: 'topRenkars', component: TopRankers, canActivate: [AuthGuard]},
     {
-            path: 'accomodation',
+        path: 'accomodation',
+        canActivate: [AuthGuard],
             loadChildren: './accomodation/accomodation.module#AccomodationModule'
     },
     {
