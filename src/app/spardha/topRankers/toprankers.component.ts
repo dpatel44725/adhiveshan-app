@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as jspdf from 'jspdf';
 
@@ -43,11 +43,16 @@ export class TopRankers implements OnInit{
             slot_marks_verified_by: "",
             slot_marks_submitted: ""
         }
-    }
+    };
+    
     topRankMarks: any = [];
     topRangegroup: any = ['10', '20', '30', '40', '50']
     minMaxRange:any = ['10', '20', '30', '40', '50', '60', '70', '80', '90', '100']
     display = 'none'; //default Variable
+    sections: FormArray;
+    
+    items: FormArray;
+    
     markReqObj = {
         top_record: 0,
         min_marks: 0,
@@ -62,28 +67,34 @@ export class TopRankers implements OnInit{
         private spardhaservice: SpardhaService,
         private alertService: AlertService,
         private modalService: NgbModal,
-        private formBuilder: FormBuilder
+        private fb: FormBuilder
     ) {
         
     }
     @ViewChild('contentToConvert') contentToConvert: ElementRef;
     ngOnInit() {
-        this.searchMarkesForm = new FormGroup({
-            minMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100) ] ),
-            maxMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)])
-            
+        this.searchMarkesForm = this.fb.group({
+            //minMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100) ] ),
+            //maxMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)]),
+            sections: this.fb.array([])
+
         });
 
-        this.searchMarkesForm.controls['minMarks'].valueChanges.subscribe(value => {
-            console.log(value);
-        });
-       
+        //this.searchMarkesForm.controls['minMarks'].valueChanges.subscribe(value => {
+        //    console.log(value);
+        //});
+       // let tempdata: any = ["Pravachan", "Mukh Path", "Vachnamrut"];
+       //this.setSectionsWithData(tempdata);
+        
         this.spardhaservice.getUniqueSaprdhaName()
              .pipe()
              .subscribe(
                  data => {
                      console.log(data)
-                     this.spardhaUniqueName=data;
+                     //this.spardhaUniqueName = data;
+                     this.setSectionsWithData(data);
+
+
                      console.log(this.spardhaUniqueName.spardhas)
                     /// this.router.navigateByUrl('/');
                  },
@@ -91,6 +102,25 @@ export class TopRankers implements OnInit{
                      this.alertService.error(error);
                      this.loading = false;
                  });
+    }
+    createSections(): FormGroup  {
+        return this.fb.group({
+            spardhaname: new FormControl(''),
+            markeRange: new FormControl('', [Validators.required]),
+            minMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)]),
+            maxMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)])
+        });
+    }
+    setSectionsWithData(data) {
+        this.spardhaList = data;
+        this.spardhaUniqueName = [];
+        this.spardhaList.forEach((saprdhaName, index) => {
+            this.sections = this.searchMarkesForm.get('sections') as FormArray;
+            this.spardhaUniqueName.push({ id: index, sectionName: saprdhaName, marks:[] });
+            this.sections.push(this.createSections())
+            
+        });
+
     }
     get f() { return this.searchMarkesForm.controls; };
     get minMarks() {
@@ -134,7 +164,7 @@ export class TopRankers implements OnInit{
         }
         else return false;
     }
-    selectRomove(_mark_id,actionName, index){
+    selectRomove(_mark_id,actionName, sectionIndex){
         let select_remove = {
             mark_id: _mark_id,
             action: actionName
@@ -146,14 +176,20 @@ export class TopRankers implements OnInit{
         else {
             editField = 'No'
         }
+
+
+        
+
+
+
         this.spardhaservice.select_remove_for_final_adhivation(select_remove)
              .pipe()
              .subscribe(
                  data => {
                      console.log(data)
-                     let updateItem = this.topRankMarks.marks.find(mark => mark.mark_id === _mark_id);
-                     let _index = this.topRankMarks.marks.indexOf(updateItem);
-                     this.topRankMarks.marks[_index].mark_selected4final = editField;
+                     let updateItem = this.spardhaUniqueName[sectionIndex].marks.marks.find(mark => mark.mark_id === _mark_id);
+                     let _index = this.spardhaUniqueName[sectionIndex].marks.indexOf(updateItem);
+                     this.spardhaUniqueName[sectionIndex].marks[_index].mark_selected4final = editField;
                      //this.spardhaDate=data;
                      //console.log(this.spardhaDate.dates)
                     /// this.router.navigateByUrl('/');
@@ -163,32 +199,37 @@ export class TopRankers implements OnInit{
                      this.loading = false;
                  });
     }
-    onSubmit() {
-        this.submitted = true;
-        let minMarkesValue = this.searchMarkesForm.controls['minMarks'].value;
-        let maxMarkesValue = this.searchMarkesForm.controls['maxMarks'].value;
-        console.log(this.searchMarkesForm.controls['minMarks'].value)
+    onSubmit(index) {
+        let telp = this.searchMarkesForm.get('sections') as FormArray;
+        let minMarkesValue = telp.controls[index]['controls'].minMarks.value;
+        let maxMarkesValue = telp.controls[index]['controls'].maxMarks.value
+       // console.log(this.searchMarkesForm.controls['minMarks'].value)
         // stop here if form is invalid
 
         if (minMarkesValue > maxMarkesValue) {
-            this.maxMarks.setErrors({ 'incorrect': true });
-            
+            telp.controls[index]['controls'].maxMarks.setErrors({ 'incorrect': true });
+            return;
         }
         /// backend call
         
         
         
-        if (this.searchMarkesForm.invalid) {
+        if (telp.controls[index]['controls'].spardhaname.value === "" || telp.controls[index]['controls'].markeRange.value === "") {
             return;
         }
         this.markReqObj.min_marks = minMarkesValue;
         this.markReqObj.max_marks = maxMarkesValue;
+        this.markReqObj.spardha_name = telp.controls[index]['controls'].spardhaname.value;
+        this.markReqObj.top_record = telp.controls[index]['controls'].markeRange.value;
+        
+        
         this.spardhaservice.getSpardhaMarks(this.markReqObj)
             .pipe()
             .subscribe(
                 data => {
                     console.log(data)
                     this.topRankMarks = data;
+                    this.spardhaUniqueName[index].marks = this.topRankMarks.marks;
                     console.log(this.spardhaUniqueName.spardhas)
                     /// this.router.navigateByUrl('/');
                 },
