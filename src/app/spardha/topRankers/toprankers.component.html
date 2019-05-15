@@ -1,33 +1,35 @@
 <div class="main-content">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Top Rankers</h4>
-                </div>
-                <form class="form-horizontal" [formGroup]="searchMarkesForm" >
+            <form class="form-horizontal" [formGroup]="searchMarkesForm">
+                <div formArrayName="sections" *ngFor="let section of searchMarkesForm.get('sections')['controls']; let i = index;">
+                <div class="card" [formGroupName]="i" >
+                    <div class="card-header">
+                        <h4 class="card-title">Top Rankers : {{f.sections.controls[i].controls.spardhaname.value}}</h4>
+                    </div>
+
                     <div class="row">
 
                         <div class="col-lg-4 col-md-6 col-sm-3">
                             <label class=" col-form-label">Spardha Name</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_setSpardhaName($event.target.value)">
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select"  formControlName="spardhaname" >
                                 <option value="0">Select Spardha</option>
-                                <option [value]="spardha.slot_spardha" *ngFor="let spardha of spardhaUniqueName.spardhas">  {{spardha.slot_spardha}}</option>
+                                <option [value]="spardha" *ngFor="let spardha of spardhaList">  {{spardha}}</option>
                             </select>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-3">
                             <label class=" col-form-label">Marks Range</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Top Range" (change)="_setTop_record($event.target.value)">
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Top Range"  formControlName="markeRange" >
                                 <option [value]="topRange" *ngFor="let topRange of topRangegroup">  {{topRange}}</option>
                             </select>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-3">
                             <div class="form-group row">
                                 <label class="col-sm-8 col-form-label">Minimum Marks</label>
-                                <input type="number" formControlName="minMarks" class="form-control col-sm-4" [ngClass]="{ 'is-invalid': submitted && f.minMarks.errors }"  />
-                                <div *ngIf="submitted && f.minMarks.errors" class="invalid-feedback col-sm-12">
-                                    <div *ngIf="f.minMarks.errors.required">Minimum Markrs Required</div>
-                                    <div *ngIf="f.minMarks.errors.min">Minimum Marks must be less then Maximum marks</div>
+                                <input type="number" formControlName="minMarks" class="form-control col-sm-4" [ngClass]="{ 'is-invalid': f.sections.controls[i].controls.minMarks.errors }" />
+                                <div *ngIf="f.sections.controls[i].controls.minMarks.errors" class="invalid-feedback col-sm-12">
+                                    <div *ngIf="f.sections.controls[i].controls.minMarks.errors.required">Minimum Markrs Required</div>
+                                    <div *ngIf="f.sections.controls[i].controls.minMarks.errors.min">Minimum Marks must be less then Maximum marks</div>
                                 </div>
 
 
@@ -36,72 +38,74 @@
                         <div class="col-lg-2 col-md-6 col-sm-3">
                             <div class="form-group row">
                                 <label class="col-sm-8 col-form-label">Maximum Marks</label>
-                                <input type="number" formControlName="maxMarks" class="form-control col-sm-4" [ngClass]="{ 'is-invalid': submitted && f.maxMarks.errors }"/>
-                                <div *ngIf="submitted && f.maxMarks.errors" class="invalid-feedback col-sm-12">
-                                    <div *ngIf="f.maxMarks.errors.required">Maximum Markrs Required</div>
-                                    <div *ngIf="f.maxMarks.errors.max">Maximum Marks must be more then Minimum marks and less then 101</div>
+                                <input type="number" formControlName="maxMarks" class="form-control col-sm-4" [ngClass]="{ 'is-invalid': f.sections.controls[i].controls.maxMarks.errors }" />
+                                <div *ngIf="f.sections.controls[i].controls.maxMarks.errors" class="invalid-feedback col-sm-12">
+                                    <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.required">Maximum Markrs Required</div>
+                                    <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.max">Maximum Marks must be more then Minimum marks and less then 101</div>
                                 </div>
 
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-3 ">
                             <div class="">
-                                <button [disabled]="loading" class="btn btn-primary col-lg-10 float-left mt-0" (click)="onSubmit()">Search</button>
-                            </div>
+                                <button [disabled]="loading" class="btn btn-primary col-lg-10 float-left mt-0" (click)="onSubmit(i)">Search</button>
                             </div>
                         </div>
-                </form>
-                <div class="card-body">
-                    <div class="toolbar">
-                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-
                     </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead class="text-primary">
-                                <tr>
-                            <th class="text-center">
-                                No.
-                            </th>
-                            <th>
-                                Balak ID
-                            </th>
-                            <th>
-                                Balak Name
-                            </th>
-                            <th class="text-center">
-                                Marks
-                            </th>
-                            <th >
-                                Select/ Remove for Final
-                            </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let mark of topRankMarks.marks; let i = index">
-                                    <td class="text-center">{{i+1}}</td>
-                                    <td>{{mark.mark_bal_id}}</td>
-                                    <td>{{mark.bal_name}} {{mark.bal_surname}}</td>
-                                    <td class="text-center">{{mark.mark_marks}}</td>
-                                    
-                                    <td class="text-right">
-                                        <button *ngIf="showAdd(mark.mark_selected4final)" type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="selectRomove(mark.mark_id, 'select', i)">
-                                            Select
-                                        </button>
-                                        <button *ngIf="showRemove(mark.mark_selected4final)" type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="selectRomove(mark.mark_id, 'remove', i)">
-                                            Remove
-                                        </button>
+
+                    <div class="card-body">
+                        <div class="toolbar">
+                            <!--        Here you can write extra buttons/actions for the toolbar              -->
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="text-primary">
+                                    <tr>
+                                        <th class="text-center">
+                                            No.
+                                        </th>
+                                        <th>
+                                            Balak ID
+                                        </th>
+                                        <th>
+                                            Balak Name
+                                        </th>
+                                        <th class="text-center">
+                                            Marks
+                                        </th>
+                                        <th>
+                                            Select/ Remove for Final
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let mark of spardhaUniqueName[i].marks;">
+                                        <td class="text-center">{{i+1}}</td>
+                                        <td>{{mark.mark_bal_id}}</td>
+                                        <td>{{mark.bal_name}} {{mark.bal_surname}}</td>
+                                        <td class="text-center">{{mark.mark_marks}}</td>
+
+                                        <td class="text-right">
+                                            <button *ngIf="showAdd(mark.mark_selected4final)" type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="selectRomove(mark.mark_id, 'select',i)">
+                                                Select
+                                            </button>
+                                            <button *ngIf="showRemove(mark.mark_selected4final)" type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="selectRomove(mark.mark_id, 'remove',i)">
+                                                Remove
+                                            </button>
 
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            </form>
         </div>
 
 
