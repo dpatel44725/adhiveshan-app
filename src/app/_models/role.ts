@@ -1,0 +1,7 @@
+﻿export enum Role {
+    ATTENDANCE_MANAGER = '3',
+    SUPER_ADMIN = '1',
+    MARKSHEET_MANAGER = '4',
+    VERIFICATION_MANAGER = '5',
+    ACCOMMODATION_MANAGER = '6'
+}

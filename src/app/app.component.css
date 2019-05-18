@@ -2,3 +2,6 @@
     background-color: #51cbce !important;
     border: 1px solid #51cbce !important;
 }
+.heightAuto {
+    height: auto;
+}

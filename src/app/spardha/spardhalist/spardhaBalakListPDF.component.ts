@@ -4,9 +4,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as jspdf from 'jspdf';
 
 import html2canvas from 'html2canvas'; 
-import { AlertService, SpardhaService } from '../../_services';
+import { AlertService, SpardhaService, AuthenticationService } from '../../_services';
 declare var $: any;
-
+import { Role } from '../../_models';
 
 @Component({
     moduleId: module.id,
@@ -20,6 +20,7 @@ export class SpardhaDetail implements OnInit {
     selectedDate: string = "";
     selectedTime: string = "";
     closeResult: string;
+    apiCall: any;
     spardhaBalakList: any = {
         spardha_info: {
             slot_id: '',
@@ -42,14 +43,30 @@ export class SpardhaDetail implements OnInit {
     showVerifiedBy: boolean = false;
     showDownload: boolean = false;
     display = 'none'; //default Variable
+    authenticationService: AuthenticationService;
+    currentUser: any;
     constructor(
         private router: Router,
         private spardhaservice: SpardhaService,
         private alertService: AlertService,
         private modalService: NgbModal,
-        private _route: ActivatedRoute
+        private _route: ActivatedRoute,
+        authenticationService: AuthenticationService
+        
     ) {
-
+        this.authenticationService = authenticationService;
+        this.currentUser = authenticationService.currentUserValue;
+        if (this.currentUser.user_role === Role.SUPER_ADMIN) {
+            this.showSubmited = true;
+            this.showSave = true;
+        }
+        else if (this.currentUser.user_role === Role.MARKSHEET_MANAGER || this.currentUser.user_role === Role.SUPER_ADMIN) {
+            this.showSave = true;
+        }
+        else if (this.currentUser.user_role === Role.VERIFICATION_MANAGER || this.currentUser.user_role === Role.SUPER_ADMIN) {
+            this.showVerifiedBy = true;
+            this.showSave = true;
+        }
     }
     ngOnInit() {
         const slot_id = +this._route.snapshot.paramMap.get('id');
@@ -59,20 +76,21 @@ export class SpardhaDetail implements OnInit {
             .subscribe(
                 data => {
                    this.spardhaBalakList = data;
-                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "No") {
-                        this.showSave = true;
+                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes" && this.currentUser.user_role !== Role.MARKSHEET_MANAGER) {
+                        this.showSave = false;
+                        this.showVerifiedBy = false;
 
                     }
-                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
-                        this.showSubmited = true;
-                        this.showSave = false;
-                        this.showVerifiedBy = true;
-                    }
-                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes" && this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
-                        this.showSubmited = false;
-                        this.showSave = false;
-                        this.showVerifiedBy = true;
-                    }
+                    //if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
+                    //    this.showSubmited = true;
+                    //    this.showSave = false;
+                    //    this.showVerifiedBy = true;
+                    //}
+                    //if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes" && this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
+                    //    this.showSubmited = false;
+                    //    this.showSave = false;
+                    //    this.showVerifiedBy = true;
+                    //}
                     this.display = 'block';
                     console.log(this.spardhaBalakList)
                     this.showDownload = true;
@@ -97,15 +115,22 @@ export class SpardhaDetail implements OnInit {
         this.spardhaservice.submitSpardhaBalakMarks(submitMarks)
             .pipe()
             .subscribe(
-                data => {
-                   this.router.navigateByUrl('/spardha');
+            data => {
+                this.apiCall = data;
+                  // this.router.navigateByUrl('/spardha');
+                this.alertService.success(this.apiCall.message);
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
                 });
     }
+    submitMarks() {
 
+    }
+    verifiedMarks() {
+
+    }
     captureScreen() {
         
         var data = document.getElementById('reportContent');

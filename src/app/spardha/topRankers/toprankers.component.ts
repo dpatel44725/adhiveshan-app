@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@ang
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as jspdf from 'jspdf';
 
+
 import html2canvas from 'html2canvas'; 
 import {AlertService, SpardhaService} from '../../_services';
 import { Text } from '@angular/compiler/src/i18n/i18n_ast';
@@ -24,6 +25,7 @@ export class TopRankers implements OnInit{
     spardhaList: any = [];
     searchMarkesForm: FormGroup;
     submitted = false;
+    verified = false;
     selectedSaprdha:string="";
     selectedDate:string="";
     selectedTime:string="";
@@ -61,15 +63,18 @@ export class TopRankers implements OnInit{
 
 
     }
+    currentUser: any;
     
     constructor(
         private router: Router,
         private spardhaservice: SpardhaService,
         private alertService: AlertService,
         private modalService: NgbModal,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        
     ) {
         
+
     }
     @ViewChild('contentToConvert') contentToConvert: ElementRef;
     ngOnInit() {
@@ -120,9 +125,9 @@ export class TopRankers implements OnInit{
     createSections(): FormGroup  {
         return this.fb.group({
             spardhaname: new FormControl(''),
-            markeRange: new FormControl('', [Validators.required]),
-            minMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)]),
-            maxMarks: new FormControl('', [Validators.required, Validators.min(0), Validators.max(100)])
+            markeRange: new FormControl(''),
+            minMarks: new FormControl(''),
+            maxMarks: new FormControl('')
         });
     }
     setSectionsWithData(data) {
@@ -221,14 +226,14 @@ export class TopRankers implements OnInit{
         // stop here if form is invalid
 
         if (minMarkesValue > maxMarkesValue) {
-            telp.controls[index]['controls'].maxMarks.setErrors({ 'incorrect': true });
+            //telp.controls[index]['controls'].maxMarks.setErrors({ 'incorrect': true });
             return;
         }
         /// backend call
         
         
         
-        if (telp.controls[index]['controls'].spardhaname.value === "" || telp.controls[index]['controls'].markeRange.value === "") {
+        if (telp.controls[index]['controls'].spardhaname.value === "" ) {
             return;
         }
         this.markReqObj.min_marks = minMarkesValue;

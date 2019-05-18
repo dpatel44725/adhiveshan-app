@@ -25,11 +25,11 @@
                         <div class="col-lg-2 col-md-6 col-sm-3">
                             <div class="form-group row">
                                 <label class="col-sm-8 col-form-label">Minimum Marks</label>
-                                <input type="number" formControlName="minMarks" class="form-control col-sm-4" [ngClass]="{ 'is-invalid': f.sections.controls[i].controls.minMarks.errors }" />
-                                <div *ngIf="f.sections.controls[i].controls.minMarks.errors" class="invalid-feedback col-sm-12">
+                                <input type="number" formControlName="minMarks" class="form-control col-sm-4" />
+                                <!--<div *ngIf="f.sections.controls[i].controls.minMarks.errors" class="invalid-feedback col-sm-12">
                                     <div *ngIf="f.sections.controls[i].controls.minMarks.errors.required">Minimum Markrs Required</div>
                                     <div *ngIf="f.sections.controls[i].controls.minMarks.errors.min">Minimum Marks must be less then Maximum marks</div>
-                                </div>
+                                </div>-->
 
 
                             </div>
@@ -37,11 +37,11 @@
                         <div class="col-lg-2 col-md-6 col-sm-3">
                             <div class="form-group row">
                                 <label class="col-sm-8 col-form-label">Maximum Marks</label>
-                                <input type="number" formControlName="maxMarks" class="form-control col-sm-4" [ngClass]="{ 'is-invalid': f.sections.controls[i].controls.maxMarks.errors }" />
-                                <div *ngIf="f.sections.controls[i].controls.maxMarks.errors" class="invalid-feedback col-sm-12">
+                                <input type="number" formControlName="maxMarks" class="form-control col-sm-4" />
+                                <!--<div *ngIf="f.sections.controls[i].controls.maxMarks.errors" class="invalid-feedback col-sm-12">
                                     <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.required">Maximum Markrs Required</div>
                                     <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.max">Maximum Marks must be more then Minimum marks and less then 101</div>
-                                </div>
+                                </div>-->
 
                             </div>
                         </div>

@@ -3,8 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as jspdf from 'jspdf';
 
+
 import html2canvas from 'html2canvas'; 
-import {AlertService, SpardhaService} from '../../_services';
+import { AlertService, SpardhaService } from '../../_services';
+
 declare var $:any;
 
 
@@ -42,13 +44,15 @@ selectedTime:string="";
     }
     display = 'none'; //default Variable
     
+    
 constructor(
                 private router: Router,
                 private spardhaservice: SpardhaService,
                 private alertService: AlertService,
-                private modalService: NgbModal
+    private modalService: NgbModal,
+    
                 ) {
-        
+    
     }
     @ViewChild('contentToConvert') contentToConvert: ElementRef;
     ngOnInit(){

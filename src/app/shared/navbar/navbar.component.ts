@@ -3,6 +3,7 @@ import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthenticationService } from '../../_services';
 
 var misc:any ={
     navbar_menu_visible: 0,
@@ -23,13 +24,17 @@ export class NavbarComponent implements OnInit{
     private toggleButton;
     private sidebarVisible: boolean;
     private _router: Subscription;
+    authenticationService: AuthenticationService;
+    
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
+    constructor(location: Location, private renderer: Renderer, private element: ElementRef, private router: Router, authenticationService: AuthenticationService) {
         this.location = location;
         this.nativeElement = element.nativeElement;
+        this.authenticationService = authenticationService;
         this.sidebarVisible = false;
+
     }
 
     ngOnInit(){
@@ -48,7 +53,11 @@ export class NavbarComponent implements OnInit{
           }
         });
     }
-
+    logout() {
+        if (this.authenticationService.logout()) {
+            this.router.navigate(['/login'], { queryParams: { returnUrl: "dashboard" } });
+        };
+    }
     minimizeSidebar(){
       const body = document.getElementsByTagName('body')[0];
 
