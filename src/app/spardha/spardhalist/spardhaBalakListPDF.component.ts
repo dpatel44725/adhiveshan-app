@@ -131,7 +131,7 @@ export class SpardhaDetail implements OnInit {
     }
     verifiedMarks() {
         const submitVerified: any = {};
-        submitVerified.spardha_id = this.spardhaBalakList.spardha_info.;
+        submitVerified.spardha_id = this.spardhaBalakList.spardha_info.slot_id;
         this.spardhaservice.submitVerified(submitVerified)
             .pipe()
             .subscribe(
