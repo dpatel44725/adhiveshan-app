@@ -126,10 +126,24 @@ export class SpardhaDetail implements OnInit {
                 });
     }
     submitMarks() {
+        
 
     }
     verifiedMarks() {
-
+        const submitVerified: any = {};
+        submitVerified.spardha_id = this.spardhaBalakList.spardha_info.;
+        this.spardhaservice.submitVerified(submitVerified)
+            .pipe()
+            .subscribe(
+                data => {
+                    this.apiCall = data;
+                    // this.router.navigateByUrl('/spardha');
+                    this.alertService.success(this.apiCall.message);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
     }
     captureScreen() {
         
