@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
-
+import { AuthenticationService } from '../_services';
+﻿import { Role } from "../_models/role";
+const currentUser: any = JSON.parse(sessionStorage.getItem('currentUser'));
 //Metadata
 export interface RouteInfo {
     path: string;
@@ -18,7 +20,7 @@ export interface ChildrenItems {
 }
 
 //Menu Items
-export const ROUTES: RouteInfo[] = [{
+const ROUTES_OLD: RouteInfo[] = [{
         path: '/dashboard',
         title: 'Dashboard',
         type: 'link',
@@ -125,7 +127,66 @@ export const ROUTES: RouteInfo[] = [{
     //     ]
    // },
 ];
-
+let ROUTES_ARR: RouteInfo[] = [{
+        path: '/dashboard',
+        title: 'Dashboard',
+        type: 'link',
+        icontype: 'nc-icon nc-bank'
+        }];
+if(currentUser != null && currentUser.user_role != undefined){
+switch(currentUser.user_role){
+  case Role.MARKSHEET_MANAGER:
+      ROUTES_ARR.push({
+          path: '/spardha/detail',
+          title: 'Spardha',
+          type: 'link',
+          icontype: 'nc-icon nc-layout-11',
+          /*children: [
+              {path: 'detail', title: 'Saprdha Detail', ab: 'SD'}
+          ]*/
+      },);
+  break;
+  case Role.ACCOMMODATION_MANAGER:
+    ROUTES_ARR.push({
+        path: '/accomodation',
+        title: 'Accommodation',
+        type: 'sub',
+        icontype: 'nc-icon nc-layout-11',
+        children: [
+            {path: 'accomodation-info', title: 'Info', ab: 'IN'},
+            {path: 'accomodation', title: 'Accommodation', ab: 'AD'}
+        ]
+    });
+  break;
+  case Role.SUPER_ADMIN:
+    ROUTES_ARR.push(
+          {
+            path: '/topRenkars',
+            title: 'top Renkars',
+            type: 'link',
+            icontype: 'nc-icon nc-bank'
+          },
+          {
+              path: '/spardha/detail',
+              title: 'Spardha',
+              type: 'link',
+              icontype: 'nc-icon nc-layout-11',
+          },
+          {
+            path: '/accomodation',
+            title: 'Accommodation',
+            type: 'sub',
+            icontype: 'nc-icon nc-layout-11',
+            children: [
+                {path: 'accomodation-info', title: 'Info', ab: 'IN'},
+                {path: 'accomodation', title: 'Accommodation', ab: 'AD'}
+            ]
+          }
+      );
+  break;
+}
+}
+export const ROUTES: RouteInfo[] = [...ROUTES_ARR];
 @Component({
     moduleId: module.id,
     selector: 'sidebar-cmp',
