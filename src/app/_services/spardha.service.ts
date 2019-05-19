@@ -5,7 +5,8 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SpardhaService {
-    public currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+    //public currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+    public currentUser: any = JSON.parse(sessionStorage.getItem('currentUser'));
 
     constructor(private http: HttpClient) {  
         

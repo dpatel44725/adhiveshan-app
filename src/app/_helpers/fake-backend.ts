@@ -10,7 +10,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
-        const users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+       // const users: any[] = JSON.parse(localStorage.getItem('users')) || [];
+        const users: any[] =  JSON.parse(sessionStorage.getItem('users')) || [];
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -84,7 +85,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // save new user
                 newUser.id = users.length + 1;
                 users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
+               // localStorage.setItem('users', JSON.stringify(users));
+                sessionStorage.setItem('users',JSON.stringify(users))
 
                 // respond 200 OK
                 return of(new HttpResponse({ status: 200 }));
@@ -103,7 +105,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         if (user.id === id) {
                             // delete user
                             users.splice(i, 1);
-                            localStorage.setItem('users', JSON.stringify(users));
+                            //localStorage.setItem('users', JSON.stringify(users));
+                            sessionStorage.setItem('users',JSON.stringify(users));
                             break;
                         }
                     }

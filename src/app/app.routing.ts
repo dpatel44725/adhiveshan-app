@@ -7,7 +7,7 @@ import {LoginComponent} from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component';
 import { TopRankers } from './spardha/topRankers/toprankers.component';
-
+import { Role } from "./_models";
 
 export const AppRoutes: Routes = [{
     path: '',
@@ -35,13 +35,16 @@ export const AppRoutes: Routes = [{
     }, {
         path: 'spardha',
         canActivate: [AuthGuard],
+        data:{roles:[Role.SUPER_ADMIN,Role.MARKSHEET_MANAGER,Role.VERIFICATION_MANAGER]},
         loadChildren: './spardha/spardha.module#SpardhaModule'
         },
-        { path: 'spardhaDetail/:id', component: SpardhaDetail, canActivate: [AuthGuard]},
+        { path: 'spardhaDetail/:id', component: SpardhaDetail, canActivate: [AuthGuard]
+    ,data:{ roles:[Role.SUPER_ADMIN,Role.VERIFICATION_MANAGER] }},
         { path: 'topRenkars', component: TopRankers, canActivate: [AuthGuard]},
     {
         path: 'accomodation',
         canActivate: [AuthGuard],
+        data: { roles: [Role.ACCOMMODATION_MANAGER, Role.SUPER_ADMIN] },
             loadChildren: './accomodation/accomodation.module#AccomodationModule'
     },
     {

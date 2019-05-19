@@ -6,8 +6,8 @@ import {Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AccomodationService {
-    public currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
-
+   // public currentUser: any = JSON.parse(localStorage.getItem('currentUser'));
+    public currentUser: any =JSON.parse(sessionStorage.getItem('currentUser'));
     constructor(private http: HttpClient) {
 
     }
