@@ -39,7 +39,7 @@ export const AppRoutes: Routes = [{
         loadChildren: './spardha/spardha.module#SpardhaModule'
         },
         { path: 'spardhaDetail/:id', component: SpardhaDetail, canActivate: [AuthGuard]
-    ,data:{ roles:[Role.SUPER_ADMIN,Role.VERIFICATION_MANAGER] }},
+            , data: { roles: [Role.SUPER_ADMIN, Role.VERIFICATION_MANAGER, Role.MARKSHEET_MANAGER] }},
         { path: 'topRenkars', component: TopRankers, canActivate: [AuthGuard]},
     {
         path: 'accomodation',

@@ -25,7 +25,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'nc-icon nc-bank'
         }, {
         path: '/topRenkars',
-        title: 'topRenkars',
+        title: 'top Renkars',
                 type: 'link',
                 icontype: 'nc-icon nc-bank'
             },
@@ -36,7 +36,7 @@ export const ROUTES: RouteInfo[] = [{
         type: 'sub',
         icontype: 'nc-icon nc-layout-11',
         children: [
-            {path: 'detail', title: 'Saprdha Detail', ab: 'DE'}
+            {path: 'detail', title: 'Saprdha Detail', ab: 'SD'}
         ]
     },
     {
