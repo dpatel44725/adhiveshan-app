@@ -35,7 +35,7 @@ export class SpardhaService {
         return this.http.post(`${environment.apiUrl}/submit_balaks_spardha_marks`, { security_token: this.currentUser.security_token, spardha_id:submitMarksObj.spardha_id, marks:submitMarksObj.marks}); 
     }
     getSpardhaMarks(getMarkReqObj) {
-        return this.http.post(`${environment.apiUrl}/get_spardha_marks`, { security_token: this.currentUser.security_token, top_record: getMarkReqObj.top_record, min_marks: getMarkReqObj.min_marks, max_marks: getMarkReqObj.max_marks});
+        return this.http.post(`${environment.apiUrl}/get_spardha_marks`, { security_token: this.currentUser.security_token, top_record: getMarkReqObj.top_record, min_marks: getMarkReqObj.min_marks, max_marks: getMarkReqObj.max_marks, spardha_name: getMarkReqObj.spardha_name});
     }
     select_remove_for_final_adhivation(select_remove) {
         return this.http.post(`${environment.apiUrl}/select_remove_for_final_adhivation`, { security_token: this.currentUser.security_token, mark_id: select_remove.mark_id, action: select_remove.action });
