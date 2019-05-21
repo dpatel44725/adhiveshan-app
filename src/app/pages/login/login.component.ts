@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
-    loginError:false;
+    loginError:boolean =false;
 
     constructor(private element: ElementRef,
                 private formBuilder: FormBuilder,
