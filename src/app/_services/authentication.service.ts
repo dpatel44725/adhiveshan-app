@@ -32,6 +32,8 @@ export class AuthenticationService {
                     this.currentUserSubject.next(user);
                     return user;
                 }else{
+                     sessionStorage.removeItem('currentUser');
+                     this.currentUserSubject.next(null);
                   return user;
                 }
 
