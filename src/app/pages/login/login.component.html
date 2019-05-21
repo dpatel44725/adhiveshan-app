@@ -18,7 +18,7 @@
                       <i class="nc-icon nc-single-02"></i>
                     </span>
                   </div>
-                  <input title="mobile" type="text" formControlName="mobile" class="form-control" placeholder="Mobile Number" (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
+                  <input title="mobile" type="text" formControlName="mobile" class="form-control" placeholder="User Name" (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': submitted && f.mobile.errors }" />
                   <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                     <div *ngIf="f.mobile.errors.required">mobile is required</div>
                   </div>
@@ -41,10 +41,9 @@
                   <a routerLink="/register" class="btn btn-warning btn-round btn-block mb-3">Register</a>
                 </div>
               </div>
-              <!--<div class="card-footer ">-->
-                <!--&lt;!&ndash;<button [disabled]="loading" class="btn btn-primary">Login</button>&ndash;&gt;-->
-                <!--<a href="#pablo" class="btn btn-warning btn-round btn-block mb-3">Get Started</a>-->
-              <!--</div>-->
+              <div class="card-footer " *ngIf="loginError">
+                <p class="text-danger">User name or password not does not matched....</p>
+              </div>
             </div>
         </div>
         </form>
