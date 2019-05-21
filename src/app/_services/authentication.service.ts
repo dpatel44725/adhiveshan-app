@@ -18,22 +18,24 @@ export class AuthenticationService {
     }
 
     public get currentUserValue(): User {
-        return this.currentUserSubject.value; 
+        return this.currentUserSubject.value;
     }
 
     login(mobile: string, password: string) {
-        return this.http.post<any>(`http://taskupdate.in/baladhivation/api/front/login`, { mobile, password })
+        return this.http.post<any>(`${environment.apiUrl}/login`, { mobile, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
-                if (user.status ="pass") {
+                if (user.status == "pass") {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                   //  localStorage.setItem('currentUser', JSON.stringify(user,));
                     sessionStorage.setItem('currentUser', JSON.stringify(user));
                     this.currentUserSubject.next(user);
                     return user;
+                }else{
+                  return user;
                 }
 
-                
+
             }));
     }
 

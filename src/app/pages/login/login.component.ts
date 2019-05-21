@@ -5,7 +5,7 @@ import {AlertService, AuthenticationService} from '../../_services';
 
 declare var $: any;
 
-@Component({ 
+@Component({
     moduleId: module.id,
     selector: 'app-login-cmp',
     templateUrl: './login.component.html'
@@ -78,8 +78,14 @@ export class LoginComponent implements OnInit {
              .pipe()
              .subscribe(
                  data => {
-                     
-                     this.router.navigateByUrl('/');
+                   if(data.status == 'pass'){
+                       console.log('pass');
+                       this.router.navigateByUrl('/');
+                   }else{
+                     console.log('fail');
+                     this.alertService.error(data.message);
+                     this.loading = false;
+                   }
                  },
                  error => {
                      this.alertService.error(error);
