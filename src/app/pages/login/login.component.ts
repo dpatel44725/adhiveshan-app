@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    loginError:false;
 
     constructor(private element: ElementRef,
                 private formBuilder: FormBuilder,
@@ -85,6 +86,7 @@ export class LoginComponent implements OnInit {
                      console.log('fail');
                      this.alertService.error(data.message);
                      this.loading = false;
+                     this.loginError=true;
                    }
                  },
                  error => {
