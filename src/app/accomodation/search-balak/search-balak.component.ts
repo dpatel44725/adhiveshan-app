@@ -61,19 +61,19 @@ export class SearchBalakComponent implements OnInit {
   }
 
   addBalak(data) {
-    console.log(this.roomInfo);
-    const maxCap = this.roomInfo.acc_max_cap;
-    const allocated = this.roomInfo.total_allocated;
+    // console.log(this.roomInfo);
+    // const maxCap = this.roomInfo.acc_max_cap;
+    // const allocated = this.roomInfo.total_allocated;
 
-    if (maxCap === allocated) {
-      swal({
-        title: 'You can not add more balaks to room',
-        text: 'Max capacity has been achieved',
-        timer: 2000,
-        showConfirmButton: false
-      }).catch(swal.noop)
-      return;
-    } else if ( maxCap > allocated) {
+    // if (maxCap === allocated) {
+    //   swal({
+    //     title: 'You can not add more balaks to room',
+    //     text: 'Max capacity has been achieved',
+    //     timer: 2000,
+    //     showConfirmButton: false
+    //   }).catch(swal.noop)
+    //   return;
+    // } else if ( maxCap > allocated) {
       this.accomodationService.addRemoveBalakFromRoom(this.roomInfo.acc_id, data.bal_id, 'assign').subscribe(d => {
         console.log(d);
         // @ts-ignore
@@ -94,7 +94,7 @@ export class SearchBalakComponent implements OnInit {
           });
         }
       });
-    }
+
   }
 
 }

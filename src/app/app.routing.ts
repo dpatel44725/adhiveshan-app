@@ -7,13 +7,13 @@ import {LoginComponent} from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SpardhaDetail } from './spardha/spardhalist/spardhaBalakListPDF.component';
 import { TopRankers } from './spardha/topRankers/toprankers.component';
-import { Role } from "./_models";
+import { Role } from './_models';
 
 export const AppRoutes: Routes = [{
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-}, { 
+    }, {
     path: '',
     component: AdminLayoutComponent,
     children: [{
@@ -35,7 +35,7 @@ export const AppRoutes: Routes = [{
     }, {
         path: 'spardha',
         canActivate: [AuthGuard],
-        data:{roles:[Role.SUPER_ADMIN,Role.MARKSHEET_MANAGER,Role.VERIFICATION_MANAGER]},
+        data: {roles: [Role.SUPER_ADMIN, Role.MARKSHEET_MANAGER, Role.VERIFICATION_MANAGER]},
         loadChildren: './spardha/spardha.module#SpardhaModule'
         },
         { path: 'spardhaDetail/:id', component: SpardhaDetail, canActivate: [AuthGuard]
