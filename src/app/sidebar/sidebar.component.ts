@@ -147,7 +147,7 @@ const ROUTES_ARR: RouteInfo[] = [{
     },
     {
         children: [],
-        role: Role.MARKSHEET_MANAGER,
+        role: Role.MARKSHEET_MANAGER || Role.SUPER_ADMIN,
         path: '/spardha/detail',
         title: 'Spardha',
         type: 'link',
@@ -158,7 +158,7 @@ const ROUTES_ARR: RouteInfo[] = [{
     },
     {
         path: '/accomodation',
-        role: Role.ACCOMMODATION_MANAGER,
+        role: Role.ACCOMMODATION_MANAGER || Role.SUPER_ADMIN,
         title: 'Accommodation',
         type: 'sub',
         icontype: 'nc-icon nc-layout-11',
@@ -238,6 +238,7 @@ export const ROUTES: RouteInfo[] = [...ROUTES_ARR];
 export class SidebarComponent implements OnInit {
     public menuItems: any[];
     currentUser: any;
+    Role: Role;
 
     constructor(private authenticationService: AuthenticationService) {
         this.currentUser = authenticationService.currentUserValue;
