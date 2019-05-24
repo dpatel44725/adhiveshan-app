@@ -9,13 +9,13 @@
                         <div class="col-lg-2">
                             <img class="bapsLogo" src="./assets/img/Bapslogo.jpg" />
                         </div>
-                        <div class="col-lg-8 text-center">
+                        <div class="col-lg-7 text-center">
                             <p>Bal Balika Madhyasth Karyalay, Ahmedabad</p>
                             <h6 class=" border p-2">Akhil Bhartiya Bal Adhivetion - 2019 (29th May to 2nd June)</h6>
                             <div class="text-center"> <h4 class="text-white bg-dark " style="border-radius:25px;">{{spardhaBalakList.spardha_info.slot_spardha}}: Mark List</h4></div>
 
                         </div>
-                        <div class="col-lg-2 pull-right">
+                        <div class="col-lg-3 pull-right">
                             <img class="stabdiLogo" src="./assets/img/Mahotsav.png" />
                             <div class="text-center form-horizontal width-auto">
                                 <div class=" pull-right">
@@ -48,7 +48,7 @@
                             <p>Checked by:_____________________</p>
                         </div>
                         <div class="col-lg-4 text-center">
-                            <p>Adbivation Place: Sarangpur </p>
+                            <p>Adhivation Place: Sarangpur </p>
                             
 
                         </div>
@@ -101,32 +101,35 @@
                                             No.
                                         </th>
                                         <th>
-                                            Balak ID
+                                            Balak Name
                                         </th>
                                         <th>
-                                            Name
+                                            Std.
                                         </th>
                                         <th class="">
-                                            Marks
+                                            ID No.
                                         </th>
+                                        
                                         <th class="">
-                                            Region
+                                            Xetra
                                         </th>
-                                        <th class="">
-                                            Remark
-                                        </th>
+                                        <th>Marks Obtain</th>
+                                        <th>Remarks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let spardha_balak of spardhaBalakList.spardha_balaks; let i = index">
                                         <td class="padding-75rem">{{i+1}}</td>
-                                        <td>{{spardha_balak.bal_id}}</td>
                                         <td>{{spardha_balak.bal_name}}  {{spardha_balak.bal_surname}}</td>
+                                        <td>{{spardha_balak.bal_standard}}</td>
+
+                                        <td>{{spardha_balak.bal_id}}</td>
+                                        <td>{{spardha_balak.bal_xetra}}</td>
                                         <td>
                                             <input [(ngModel)]="spardha_balak.mark_marks" type="number" #ctrl="ngModel" required max="100" min="0">
 
                                         </td>
-                                        <td>{{spardha_balak.bal_region}}</td>
+                                        
                                         <td>{{spardha_balak.mark_remark}}</td>
 
                                     </tr>
@@ -138,7 +141,15 @@
                         </div>
 
                     </div>
-                </div>
+                    <div class="row text-bold">
+                        <div class="col-lg-12 p-4 ">
+                            <p class="pull-left ">Data Entred by:_____________________</p>
+                            <p class="pull-right ">Checked by: _____________________</p>
+                        </div>
+                        
+                        
+                    </div>
+            </div>
             <div class="card">
                 <div class="clearfix px-3">
                     <button type="button" rel="tooltip" class="btn btn-primary float-left " (click)="saveMarks()" *ngIf="showSave">
