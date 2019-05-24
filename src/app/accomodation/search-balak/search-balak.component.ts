@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import {AccomodationService} from '../../_services/accomodation.service';
+import swal from 'sweetalert2';
 
 declare var require: any
 declare var $: any;
@@ -16,10 +17,12 @@ export class SearchBalakComponent implements OnInit {
   id: any;
   cols: any;
   balaks: any;
+  roomInfo: any;
   constructor(public dialog: MatDialog,
               @Inject(MAT_DIALOG_DATA) public data: any, private accomodationService: AccomodationService) { }
 
   ngOnInit() {
+    this.roomInfo = this.data.accommodation_info;
 
     this.balaks = [];
     if ($('.selectpicker').length !== 0) {
@@ -58,17 +61,40 @@ export class SearchBalakComponent implements OnInit {
   }
 
   addBalak(data) {
-    this.accomodationService.addRemoveBalakFromRoom(this.data.accommodation_info.acc_id, data.bal_id, 'assign').subscribe(d =>{
-      console.log(d);
-      // @ts-ignore
-      if (d.status === 'pass') {
-        this.balaks.forEach((bal, i) => {
-          if (bal.bal_id === data.bal_id) {
-            this.balaks.splice(i, 1);
-          }
-        });
-      }
-    });
+    console.log(this.roomInfo);
+    const maxCap = this.roomInfo.acc_max_cap;
+    const allocated = this.roomInfo.total_allocated;
+
+    if (maxCap === allocated) {
+      swal({
+        title: 'You can not add more balaks to room',
+        text: 'Max capacity has been achieved',
+        timer: 2000,
+        showConfirmButton: false
+      }).catch(swal.noop)
+      return;
+    } else if ( maxCap > allocated) {
+      this.accomodationService.addRemoveBalakFromRoom(this.roomInfo.acc_id, data.bal_id, 'assign').subscribe(d => {
+        console.log(d);
+        // @ts-ignore
+        if (d.status === 'pass') {
+          swal({
+            title: 'Balak has been added to room ' + this.roomInfo.acc_title,
+            text: '',
+            timer: 2000,
+            showConfirmButton: false
+          }).catch(swal.noop);
+          this.accomodationService.getRoomByRoomId(this.roomInfo.acc_title).subscribe(room => {
+            this.roomInfo = room.accomodation_info;
+          });
+          this.balaks.forEach((bal, i) => {
+            if (bal.bal_id === data.bal_id) {
+              this.balaks.splice(i, 1);
+            }
+          });
+        }
+      });
+    }
   }
 
 }
