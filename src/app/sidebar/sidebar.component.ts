@@ -12,7 +12,7 @@ export interface RouteInfo {
     type: string;
     icontype: string;
     // icon: string;
-    role: string;
+    role: any;
     children?: ChildrenItems[];
 }
 
@@ -141,13 +141,13 @@ const ROUTES_ARR: RouteInfo[] = [{
     {
         path: '/topRenkars',
         title: 'top Renkars',
-        role: Role.SUPER_ADMIN,
+        role: [Role.SUPER_ADMIN],
         type: 'link',
         icontype: 'nc-icon nc-bank'
     },
     {
         children: [],
-        role: Role.MARKSHEET_MANAGER || Role.SUPER_ADMIN,
+        role: [Role.MARKSHEET_MANAGER, Role.SUPER_ADMIN],
         path: '/spardha/detail',
         title: 'Spardha',
         type: 'link',
@@ -158,7 +158,7 @@ const ROUTES_ARR: RouteInfo[] = [{
     },
     {
         path: '/accomodation',
-        role: Role.ACCOMMODATION_MANAGER || Role.SUPER_ADMIN,
+        role: [Role.ACCOMMODATION_MANAGER, Role.SUPER_ADMIN],
         title: 'Accommodation',
         type: 'sub',
         icontype: 'nc-icon nc-layout-11',
