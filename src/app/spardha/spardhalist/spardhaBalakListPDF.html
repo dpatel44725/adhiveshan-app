@@ -1,32 +1,67 @@
-﻿<div class="main-content">
+<div class="main-content">
     <div class="row">
         <div class="col-md-12">
             <div class="card" id="reportContent">
 
                 <div class="card-header">
-                   
-                    <div class="row border">
+                    <p class="text-bold  text-center">Pramukhswami Maharaj Shatabdi Mahotsav and Vachnamrut Dvishatabdi Upkrame</p>
+                    <div class="row ">
                         <div class="col-lg-2">
-                            <img src="./assets/img/Bapslogo.jpg" />
+                            <img class="bapsLogo" src="./assets/img/Bapslogo.jpg" />
                         </div>
-                        <div class="col-lg-8 text-center">
+                        <div class="col-lg-7 text-center">
                             <p>Bal Balika Madhyasth Karyalay, Ahmedabad</p>
                             <h6 class=" border p-2">Akhil Bhartiya Bal Adhivetion - 2019 (29th May to 2nd June)</h6>
-                            <h4 class="text-white bg-dark "  style="border-radius:25px;">{{spardhaBalakList.spardha_info.slot_spardha}}: Mark List</h4>
+                            <div class="text-center"> <h4 class="text-white bg-dark " style="border-radius:25px;">{{spardhaBalakList.spardha_info.slot_spardha}}: Mark List</h4></div>
+
                         </div>
-                        <div class="col-lg-2 pull-right">
-                            <img src="./assets/img/Mahotsav.png" />
+                        <div class="col-lg-3 pull-right">
+                            <img class="stabdiLogo" src="./assets/img/Mahotsav.png" />
+                            <div class="text-center form-horizontal width-auto">
+                                <div class=" pull-right">
+                                    <label class="checkboxLab">
+                                        <span>SH.</span>
+                                        <input type="checkbox" />
+
+                                    </label>
+                                    <label class="checkboxLab">
+                                        <span>Chhatra.</span>
+                                        <input type="checkbox" />
+
+                                    </label>
+                                    <label class="checkboxLab">
+                                        <span>Gram.</span>
+                                        <input type="checkbox" />
+
+                                    </label>
+                                    <label class="checkboxLab">
+                                        <span>Parprant</span>
+                                        <input type="checkbox" />
+
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row text-bold">
+                        <div class="col-lg-4">
+                            <p>Checked by:_____________________</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <p>Adhivation Place: Sarangpur </p>
+                            
+
+                        </div>
+                        <div class="col-lg-4 text-right">
+                            Vibhag: Bal _____ Balika _____
+                        </div>
                     </div>
-                    <form class="form-horizontal card-body">
+                </div>
+                    <!--<form class="form-horizontal card-body">
                         <div class="row border">
 
 
-                            <div class="col-lg-4 col-md-6 col-sm-3">
-                                <label class="font-weight-bold px-2">Spardha Date: </label>
-                                <label>{{spardhaBalakList.spardha_info.slot_date}}</label>
-                            </div>
+                            
                             <div class="col-lg-4 col-md-6 col-sm-3">
                                 <label class="font-weight-bold px-2">Spardha Time: </label>
                                 <label>From {{spardhaBalakList.spardha_info.slot_from_time}} To {{spardhaBalakList.spardha_info.slot_from_time}}</label>
@@ -52,7 +87,7 @@
                                 <label>{{spardhaBalakList.spardha_info.slot_marks_submitted}}</label>
                             </div>
                         </div>
-                    </form>
+                    </form>-->
                     <div class="card-body">
                         <div class="toolbar">
                             <!--        Here you can write extra buttons/actions for the toolbar              -->
@@ -66,32 +101,35 @@
                                             No.
                                         </th>
                                         <th>
-                                            Balak ID
+                                            Balak Name
                                         </th>
                                         <th>
-                                            Name
+                                            Std.
                                         </th>
                                         <th class="">
-                                            Marks
+                                            ID No.
                                         </th>
+                                        
                                         <th class="">
-                                            Region
+                                            Xetra
                                         </th>
-                                        <th class="">
-                                            Remark
-                                        </th>
+                                        <th>Marks Obtain</th>
+                                        <th>Remarks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let spardha_balak of spardhaBalakList.spardha_balaks; let i = index">
                                         <td class="padding-75rem">{{i+1}}</td>
-                                        <td>{{spardha_balak.bal_id}}</td>
                                         <td>{{spardha_balak.bal_name}}  {{spardha_balak.bal_surname}}</td>
+                                        <td>{{spardha_balak.bal_standard}}</td>
+
+                                        <td>{{spardha_balak.bal_id}}</td>
+                                        <td>{{spardha_balak.bal_xetra}}</td>
                                         <td>
                                             <input [(ngModel)]="spardha_balak.mark_marks" type="number" #ctrl="ngModel" required max="100" min="0">
 
                                         </td>
-                                        <td>{{spardha_balak.bal_region}}</td>
+                                        
                                         <td>{{spardha_balak.mark_remark}}</td>
 
                                     </tr>
@@ -103,7 +141,15 @@
                         </div>
 
                     </div>
-                </div>
+                    <div class="row text-bold">
+                        <div class="col-lg-12 p-4 ">
+                            <p class="pull-left ">Data Entred by:_____________________</p>
+                            <p class="pull-right ">Checked by: _____________________</p>
+                        </div>
+                        
+                        
+                    </div>
+            </div>
             <div class="card">
                 <div class="clearfix px-3">
                     <button type="button" rel="tooltip" class="btn btn-primary float-left " (click)="saveMarks()" *ngIf="showSave">
