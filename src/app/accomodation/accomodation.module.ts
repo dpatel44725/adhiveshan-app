@@ -11,6 +11,9 @@ import {MatButtonModule, MatDialogModule, MatIconModule, MatToolbarModule} from 
 import { AccommodationAssignDialogComponent } from './accommodation-assign-dialog/accommodation-assign-dialog.component';
 import { SearchBalakComponent } from './search-balak/search-balak.component';
 import {InputTextModule} from 'primeng/inputtext';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
+
 
 @NgModule({
     imports: [
@@ -24,9 +27,10 @@ import {InputTextModule} from 'primeng/inputtext';
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
-        InputTextModule
+        InputTextModule,
+        MatTooltipModule
     ],
   declarations: [AccomodationComponent, AccommodationInfoComponent, AccommodationAssignDialogComponent, SearchBalakComponent],
-    entryComponents: [AccommodationAssignDialogComponent, SearchBalakComponent]
+    entryComponents: [AccommodationAssignDialogComponent, SearchBalakComponent, ]
 })
 export class AccomodationModule { }

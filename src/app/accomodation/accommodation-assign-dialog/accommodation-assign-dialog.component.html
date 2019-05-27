@@ -1,80 +1,73 @@
 <mat-toolbar mat-dialog-title>
-  <span>Edit Room</span>
+    <span>Edit Room</span>
 </mat-toolbar>
 <div class="dialog-forms-row">
-  <div class="col-sm-12">
-    <mat-dialog-content>
-      <div class="card-body">
-        <div class="row">
-<!--          <div class="col-md-6">-->
-<!--            <div class="table-responsive">-->
-<!--              <table class="table">-->
-<!--                <tbody>-->
-<!--                <tr>-->
-<!--                  <td>Building</td>-->
-<!--                  <td class="text-right">-->
-<!--                    {{accomodation.acc_building}}-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Wing</td>-->
-<!--                  <td class="text-right">-->
-<!--                    {{accomodation.acc_wing}}-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Floor</td>-->
-<!--                  <td class="text-right">-->
-<!--                    {{accomodation.acc_floor}}-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Room No</td>-->
-<!--                  <td class="text-right">-->
-<!--                    {{accomodation.acc_room_no}}-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Capacity</td>-->
-<!--                  <td class="text-right">-->
-<!--                    {{accomodation.acc_max_cap}}-->
-<!--                  </td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-          <div class="col-md-12">
-            <p-table #dt [columns]="cols" [value]="balaks">
-              <ng-template pTemplate="header" let-columns>
-                <tr>
-                  <th *ngFor="let col of columns">
-                    {{col.header}}
-                  </th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr>
-                  <td *ngFor="let col of columns">
-                    <ng-container *ngIf="col.field !== '';else action">
-                      {{rowData[col.field]}}
-                    </ng-container>
-                    <ng-template #action>
-                      <button class="btn btn-danger btn-icon btn-sm" (click)="removeBalak(rowData)">
-                        <i class="fa fa-times"></i>
-                      </button>
+    <mat-dialog-content id="printContent">
+        <div class="row" style="margin: 20px">
+            <div class="card-header" style="padding-left: 100px">
+                <p class="text-bold  text-center">Pramukhswami Maharaj Shatabdi Mahotsav and Vachnamrut Dvishatabdi
+                    Upkrame</p>
+                <div class="row ">
+                    <div class="col-lg-2">
+                        <img class="bapsLogo" src="./assets/img/Bapslogo.jpg"/>
+                    </div>
+                    <div class="col-lg-7 text-center">
+                        <p>Bal Balika Madhyasth Karyalay, Ahmedabad</p>
+                        <h6 class=" border p-2">Akhil Bhartiya Bal Adhivetion - 2019 (29th May to 2nd June)</h6>
+                        <div class="text-center"><h4 class="text-white bg-dark "
+                                                     style="border-radius:25px; text-align: center"> Room
+                            No: {{accomodation.acc_room_no}}</h4>
+                        </div>
+                        <div>
+                            <h6 class="float-left" style="border-radius:25px; text-align: center">Building:
+                                {{accomodation.acc_building}}
+                            </h6>
+                            <h6 class="float-right" style="border-radius:25px; text-align: center">Floor:
+                                {{accomodation.acc_floor}}
+                            </h6>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 pull-right">
+                        <img class="stabdiLogo" src="./assets/img/Mahotsav.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p-table #dt [columns]="cols" [value]="balaks">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <ng-container *ngFor="let col of columns" >
+                                <th *ngIf="col.show"  [style.width]="col.width+'px'" >
+                                    {{col.header}}
+                                </th>
+                            </ng-container>
+                        </tr>
                     </ng-template>
-                  </td>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <ng-container *ngFor="let col of columns">
+                                <td *ngIf="col.show">
+                                    <ng-container *ngIf="col.field !== '';else action">
+                                        {{rowData[col.field]}}
+                                    </ng-container>
+                                    <ng-template #action >
+                                        <button class="btn btn-danger btn-icon btn-sm" (click)="removeBalak(rowData)">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                    </ng-template>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
-      </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
-      <button mat-raised-button type="button" mat-dialog-close>Close
-      </button>
+        <button mat-raised-button type="button" *ngIf="!showActionButtons" (click)="captureScreen()">Print
+        </button>
+        <button mat-raised-button type="button" mat-dialog-close>Close
+        </button>
     </mat-dialog-actions>
-  </div>
 </div>

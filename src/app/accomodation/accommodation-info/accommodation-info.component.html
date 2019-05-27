@@ -32,11 +32,14 @@
                     {{rowData[col.field]}}
                   </ng-container>
                   <ng-template #action>
-                    <button class="btn btn-info btn-icon btn-sm" (click)="openAssignDialog(rowData)">
+                    <button class="btn btn-info btn-icon btn-sm"  matTooltip="Edit" (click)="openAssignDialog(rowData)">
                      <i class="fa fa-edit"></i>
                     </button>
-                    <button class="btn btn-success btn-icon btn-sm" (click)="openSearchDialog(rowData)">
+                    <button class="btn btn-success btn-icon btn-sm" matTooltip="Add Balak/Balika" (click)="openSearchDialog(rowData)">
                       <i class="fa fa-plus"></i>
+                    </button>
+                    <button class="btn btn-success btn-icon btn-sm" matTooltip="Print Rooom Info" (click)="openPrintDialog(rowData)">
+                      <i class="fas fa-print"></i>
                     </button>
                   </ng-template>
                 </td>

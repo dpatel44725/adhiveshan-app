@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccomodationService} from '../../_services/accomodation.service';
 import {AccommodationAssignDialogComponent} from '../accommodation-assign-dialog/accommodation-assign-dialog.component';
 import {MatDialog} from '@angular/material';
@@ -44,6 +44,7 @@ export class AccommodationInfoComponent implements OnInit {
       width: '1000Px',
       data: {
         accommodation_info: data,
+        showActionButtons: true
       }
     });
 
@@ -69,5 +70,22 @@ export class AccommodationInfoComponent implements OnInit {
       });
     });
   }
+  openPrintDialog(data) {
+    const dialogRef = this.dialog.open(AccommodationAssignDialogComponent, {
+      width: '1000Px',
+      data: {
+        accommodation_info: data,
+        showActionButtons: false
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(d => {
+      this.accomodationService.getAllAccommodation().subscribe(dd => {
+        // @ts-ignore
+        this.accommodationData =  dd.accommodations;
+      });
+    });
+  }
+
 
 }
