@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import * as jspdf from 'jspdf';
+import { environment } from '../../../environments/environment';
 
 
 import html2canvas from 'html2canvas'; 
@@ -140,7 +141,11 @@ _getSpardhaList(spardhatime){
     }
      openModalDialog(slot_id){
          console.log(slot_id)
-         this.spardhaservice.getSpardhaBalakList(slot_id)
+         let pdfDownloadUrl = environment.pdfUrl+'/home/download_spardha_marsk_pdf/'+slot_id;
+         console.log('pdfDownloadUrl',pdfDownloadUrl);
+//         window.location = pdfDownloadUrl;
+         window.open(pdfDownloadUrl,'_blank');
+         /*this.spardhaservice.getSpardhaBalakList(slot_id)
              .pipe()
              .subscribe(
                  data => {
@@ -157,6 +162,7 @@ _getSpardhaList(spardhatime){
                      this.alertService.error(error);
                      this.loading = false;
                  });
+	*/
      //Set block css
     }
     downloadPdf() {

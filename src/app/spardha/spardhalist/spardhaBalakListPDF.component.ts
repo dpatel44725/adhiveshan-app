@@ -75,11 +75,17 @@ export class SpardhaDetail implements OnInit {
             .pipe()
             .subscribe(
                 data => {
-                   this.spardhaBalakList = data;
-                    if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes" && this.currentUser.user_role !== Role.MARKSHEET_MANAGER) {
-                        this.showSave = false;
-                        this.showVerifiedBy = false;
+                   this.spardhaBalakList = data;                   
+                    if (this.currentUser.user_role == Role.SUPER_ADMIN) {
+                    	if(this.spardhaBalakList.spardha_info.slot_marks_verified == "No")                        
+                        	this.showVerifiedBy = true;
 
+                    }else if(this.currentUser.user_role == Role.MARKSHEET_MANAGER){
+                    	if(this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes")
+                    		this.showSave = false;                    	
+                    }else if(this.currentUser.user_role == Role.VERIFICATION_MANAGER){
+                    	if(this.spardhaBalakList.spardha_info.slot_marks_verified == "No" && this.spardhaBalakList.spardha_info.slot_marks_submitted == "Yes")
+                    	this.showVerifiedBy = true;
                     }
                     //if (this.spardhaBalakList.spardha_info.slot_marks_verified == "Yes") {
                     //    this.showSubmited = true;
@@ -139,6 +145,7 @@ export class SpardhaDetail implements OnInit {
                     this.apiCall = data;
                     // this.router.navigateByUrl('/spardha');
                     this.alertService.success(this.apiCall.message);
+                    this.showVerifiedBy = false;
                 },
                 error => {
                     this.alertService.error(error);

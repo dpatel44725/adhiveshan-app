@@ -41,6 +41,6 @@ export class SpardhaService {
         return this.http.post(`${environment.apiUrl}/select_remove_for_final_adhivation`, { security_token: this.currentUser.security_token, mark_id: select_remove.mark_id, action: select_remove.action });
     }
     submitVerified(submitMarksObj) {
-        return this.http.post(`${environment.apiUrl}/spardha_id`, { security_token: this.currentUser.security_token, spardha_id: submitMarksObj.spardha_id});
+        return this.http.post(`${environment.apiUrl}/set_spardha_marks_verified`, { security_token: this.currentUser.security_token, spardha_id: submitMarksObj.spardha_id});
     }
 }
