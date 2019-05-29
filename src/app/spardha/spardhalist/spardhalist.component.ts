@@ -23,10 +23,9 @@ spardhaUniqueName:any =[];
 spardhaDate:any=[];
 spardhaTime:any=[];
 spardhaList:any=[];
-selectedSaprdha:string="0";
-selectedDate:string="0";
-    selectedTime: string = "0";
-    location_type: string ="Chhatralay"
+selectedSaprdha:string="";
+selectedDate:string="";
+selectedTime:string="";
     closeResult: string;
     spardhaBalakList: any = {
         spardha_info: {
@@ -72,9 +71,6 @@ constructor(
                      this.loading = false;
                  });
     }
-    _setRegionType(selected_location_type) {
-        this.location_type = selected_location_type;
-    }
     _getSpardhaDate(spardhasname){
         this.selectedSaprdha=spardhasname;
         this.spardhaservice.getSpardhaDate(spardhasname)
@@ -109,40 +105,19 @@ constructor(
     }
 _getSpardhaList(spardhatime){
         this.selectedTime=spardhatime;
-        //this.spardhaservice.getSpardhaList(this.selectedSaprdha ,this.selectedDate, this.selectedTime)
-        //     .pipe()
-        //     .subscribe(
-        //         data => {
-        //             console.log(data)
-        //             this.spardhaList=data;
-        //             console.log(this.spardhaDate.times)
-                    
-        //         },
-        //         error => {
-        //             this.alertService.error(error);
-        //             this.loading = false;
-        //         });
-    }
-    searchBalakList() {
-        if (this.selectedSaprdha === "0" || this.selectedDate === "0" || this.selectedTime === "0") {
-            console.log("Select")
-            return false;
-        }
-        else {
-            this.spardhaservice.getSpardhaList(this.selectedSaprdha, this.selectedDate, this.selectedTime, this.location_type)
-                .pipe()
-                .subscribe(
-                    data => {
-                        console.log(data)
-                        this.spardhaList = data;
-                        console.log(this.spardhaDate.times)
-                        /// this.router.navigateByUrl('/');
-                    },
-                    error => {
-                        this.alertService.error(error);
-                        this.loading = false;
-                    });
-        }
+        this.spardhaservice.getSpardhaList(this.selectedSaprdha ,this.selectedDate, this.selectedTime)
+             .pipe()
+             .subscribe(
+                 data => {
+                     console.log(data)
+                     this.spardhaList=data;
+                     console.log(this.spardhaDate.times)
+                    /// this.router.navigateByUrl('/');
+                 },
+                 error => {
+                     this.alertService.error(error);
+                     this.loading = false;
+                 });
     }
     open(content, slot_id) {
         console.log(slot_id)

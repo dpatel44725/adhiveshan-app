@@ -10,44 +10,54 @@
 
                     <div class="row">
 
-                        <div class="col-lg-4 col-md-6 col-sm-3">
-                            <label class=" col-form-label">Spardha Name</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select"  formControlName="spardhaname" >
+                        <div class="" style="max-width:320px; padding-left:20px; width:207px;">
+                            <label class=" col-form-label lableDisBlk">Spardha Name</label>
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" formControlName="spardhaname">
                                 <option [value]="spardha.slot_spardha" *ngFor="let spardha of spardhaList">  {{spardha.slot_spardha}}</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-3">
-                            <label class=" col-form-label">Marks Range</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Top Range"  formControlName="markeRange" >
+                        <div class="">
+                            <label class=" col-form-label lableDisBlk">Marks Range</label>
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Top Range" formControlName="markeRange">
                                 <option [value]="topRange" *ngFor="let topRange of topRangegroup">  {{topRange}}</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-3">
-                            <div class="form-group row">
-                                <label class="col-sm-8 col-form-label">Minimum Marks</label>
+                        <div class="" style="max-width:227px;">
+                            <label class="col-form-label lableDisBlk">Region Type</label>
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" formControlName="locationType" >
+                                <option value="Chhatralay">Chhatralay</option>
+                                <option value="Gramya">Gramya</option>
+                                <option value="City">City</option>
+                                <option value="Parprant">Parprant</option>
+
+                            </select>
+                        </div>
+                        <div class="">
+                            <div class="form-group row" style="width:207px; padding-left:20px;">
+                                <label class="col-sm-12 col-form-label lableDisBlk">Minimum Marks</label>
                                 <input type="number" formControlName="minMarks" class="form-control col-sm-4" />
                                 <!--<div *ngIf="f.sections.controls[i].controls.minMarks.errors" class="invalid-feedback col-sm-12">
-                                    <div *ngIf="f.sections.controls[i].controls.minMarks.errors.required">Minimum Markrs Required</div>
-                                    <div *ngIf="f.sections.controls[i].controls.minMarks.errors.min">Minimum Marks must be less then Maximum marks</div>
-                                </div>-->
+                <div *ngIf="f.sections.controls[i].controls.minMarks.errors.required">Minimum Markrs Required</div>
+                <div *ngIf="f.sections.controls[i].controls.minMarks.errors.min">Minimum Marks must be less then Maximum marks</div>
+            </div>-->
 
 
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-3">
-                            <div class="form-group row">
-                                <label class="col-sm-8 col-form-label">Maximum Marks</label>
+                        <div class="">
+                            <div class="form-group row" style="width:207px; padding-left:20px;">
+                                <label class="col-sm-12 col-form-label lableDisBlk">Maximum Marks</label>
                                 <input type="number" formControlName="maxMarks" class="form-control col-sm-4" />
                                 <!--<div *ngIf="f.sections.controls[i].controls.maxMarks.errors" class="invalid-feedback col-sm-12">
-                                    <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.required">Maximum Markrs Required</div>
-                                    <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.max">Maximum Marks must be more then Minimum marks and less then 101</div>
-                                </div>-->
+                <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.required">Maximum Markrs Required</div>
+                <div *ngIf="f.sections.controls[i].controls.maxMarks.errors.max">Maximum Marks must be more then Minimum marks and less then 101</div>
+            </div>-->
 
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-3 ">
+                        <div class="">
                             <div class="">
-                                <button [disabled]="loading" class="btn btn-primary col-lg-10 float-left mt-0" (click)="onSubmit(i)">Search</button>
+                                <button [disabled]="loading" class="btn btn-primary  float-left mt-0" (click)="onSubmit(i)">Search</button>
                             </div>
                         </div>
                     </div>

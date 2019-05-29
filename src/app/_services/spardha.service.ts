@@ -25,8 +25,8 @@ export class SpardhaService {
     getSpardhaTime(spardhaName, spardhatime){
         return this.http.post(`${environment.apiUrl}/get_spardha_times`, {security_token:this.currentUser.security_token, spardha_name:spardhaName, spardha_date:spardhatime});
     }
-    getSpardhaList(spardhaName, spardhatime, spardhaTime, locationType ){
-        return this.http.post(`${environment.apiUrl}/get_spardha_lists`, { security_token: this.currentUser.security_token, spardha_name: spardhaName, spardha_date: spardhatime, spardha_time: spardhaTime, location_type: locationType});
+    getSpardhaList(spardhaName, spardhatime, spardhaTime){
+        return this.http.post(`${environment.apiUrl}/get_spardha_lists`, {security_token:this.currentUser.security_token, spardha_name:spardhaName, spardha_date:spardhatime, spardha_time:spardhaTime});
     }
     getSpardhaBalakList(spardhaId) {
         return this.http.post(`${environment.apiUrl}/get_spardha_balak_list`, { security_token: this.currentUser.security_token, spardha_id: spardhaId});
@@ -35,7 +35,7 @@ export class SpardhaService {
         return this.http.post(`${environment.apiUrl}/submit_balaks_spardha_marks`, { security_token: this.currentUser.security_token, spardha_id:submitMarksObj.spardha_id, marks:submitMarksObj.marks}); 
     }
     getSpardhaMarks(getMarkReqObj) {
-        return this.http.post(`${environment.apiUrl}/get_spardha_marks`, { security_token: this.currentUser.security_token, top_record: getMarkReqObj.top_record, min_marks: getMarkReqObj.min_marks, max_marks: getMarkReqObj.max_marks, spardha_name: getMarkReqObj.spardha_name});
+        return this.http.post(`${environment.apiUrl}/get_spardha_marks`, { security_token: this.currentUser.security_token, top_record: getMarkReqObj.top_record, min_marks: getMarkReqObj.min_marks, max_marks: getMarkReqObj.max_marks, spardha_name: getMarkReqObj.spardha_name, location_type: getMarkReqObj.location_type });
     }
     select_remove_for_final_adhivation(select_remove) {
         return this.http.post(`${environment.apiUrl}/select_remove_for_final_adhivation`, { security_token: this.currentUser.security_token, mark_id: select_remove.mark_id, action: select_remove.action });

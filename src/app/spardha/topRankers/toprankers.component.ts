@@ -59,7 +59,8 @@ export class TopRankers implements OnInit{
         top_record: 0,
         min_marks: 0,
         max_marks: 0,
-        spardha_name:''
+        spardha_name: '',
+        location_type:''
 
 
     }
@@ -127,7 +128,8 @@ export class TopRankers implements OnInit{
             spardhaname: new FormControl(''),
             markeRange: new FormControl(''),
             minMarks: new FormControl(''),
-            maxMarks: new FormControl('')
+            maxMarks: new FormControl(''),
+            locationType:new FormControl('')
         });
     }
     setSectionsWithData(data) {
@@ -240,6 +242,7 @@ export class TopRankers implements OnInit{
         this.markReqObj.max_marks = maxMarkesValue;
         this.markReqObj.spardha_name = telp.controls[index]['controls'].spardhaname.value;
         this.markReqObj.top_record = telp.controls[index]['controls'].markeRange.value;
+        this.markReqObj.location_type = telp.controls[index]['controls'].locationType.value;
         
         
         this.spardhaservice.getSpardhaMarks(this.markReqObj)
