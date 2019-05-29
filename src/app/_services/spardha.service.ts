@@ -25,8 +25,8 @@ export class SpardhaService {
     getSpardhaTime(spardhaName, spardhatime){
         return this.http.post(`${environment.apiUrl}/get_spardha_times`, {security_token:this.currentUser.security_token, spardha_name:spardhaName, spardha_date:spardhatime});
     }
-    getSpardhaList(spardhaName, spardhatime, spardhaTime){
-        return this.http.post(`${environment.apiUrl}/get_spardha_lists`, {security_token:this.currentUser.security_token, spardha_name:spardhaName, spardha_date:spardhatime, spardha_time:spardhaTime});
+    getSpardhaList(spardhaName, spardhatime, spardhaTime, locationType ){
+        return this.http.post(`${environment.apiUrl}/get_spardha_lists`, { security_token: this.currentUser.security_token, spardha_name: spardhaName, spardha_date: spardhatime, spardha_time: spardhaTime, location_type: locationType});
     }
     getSpardhaBalakList(spardhaId) {
         return this.http.post(`${environment.apiUrl}/get_spardha_balak_list`, { security_token: this.currentUser.security_token, spardha_id: spardhaId});

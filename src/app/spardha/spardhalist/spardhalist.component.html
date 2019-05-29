@@ -8,26 +8,42 @@
                 <form class="form-horizontal">
                     <div class="row">
 
-                        <div class="col-lg-4 col-md-6 col-sm-3">
+                        <div class="col-lg-3 col-md-6 col-sm-3" style="max-width:190px;padding-left: 25px;">
                             <label class=" col-form-label">Spardha Name</label>
                             <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaDate($event.target.value)">
                                 <option value="0">Select Spardha</option>
                                 <option [value]="spardha.slot_spardha" *ngFor="let spardha of spardhaUniqueName.spardhas">  {{spardha.slot_spardha}}</option>
                             </select>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
+                        <div class="col-lg-3 col-md-6 col-sm-3" style="max-width:190px;padding-left: 25px;">
                             <label class=" col-form-label">Spardha Date</label>
                             <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaTime($event.target.value)">
                                 <option value="0">Select Spardha Date</option>
                                 <option [value]="date.slot_date" *ngFor="let date of spardhaDate.dates">  {{date.slot_date}}</option>
                             </select>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-3">
+                        <div class="col-lg-3 col-md-6 col-sm-3" style="max-width:190px;padding-left: 25px;">
                             <label class="col-form-label">Spardha Time</label>
                             <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaList($event.target.value)">
                                 <option value="0">Select Spardha Time</option>
                                 <option [value]="time.slot_from_time" *ngFor="let time of spardhaTime.times">  {{time.slot_from_time}}</option>
                             </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3" style="max-width:180px;padding-left: 25px;">
+                            <label class="col-form-label">Region Type</label>
+                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_setRegionType($event.target.value)">
+                                <option value="Chhatralay">Chhatralay</option>
+                                <option value="Gramya">Gramya</option>
+                                <option value="City">City</option>
+                                <option value="Parprant">Parprant</option>
+
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-3" style="max-width:180px;">
+                            <button type="button" rel="tooltip" class="btn btn-primary btn-download" (click)="searchBalakList()">
+                                Search
+                            </button>
+                            
                         </div>
                     </div>
                 </form>
