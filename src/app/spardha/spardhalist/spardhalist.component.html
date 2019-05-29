@@ -28,17 +28,7 @@
                                 <option value="0">Select Spardha Time</option>
                                 <option [value]="time.slot_from_time" *ngFor="let time of spardhaTime.times">  {{time.slot_from_time}}</option>
                             </select>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-3" style="max-width:180px;">
-                            <label class="col-form-label">Region Type</label>
-                            <select class="" data-size="7" data-style="btn btn-primary btn-round" title="Single Select" (change)="_getSpardhaList($event.target.value)">
-                                <option value="Chhatralay">Chhatralay</option>
-                                <option value="Gramya">Gramya</option>
-                                <option value="City">City</option>
-                                <option value="Parprant">Parprant</option>
-
-                            </select>
-                        </div>
+                        </div>                        
                         
                     </div>
                 </form>

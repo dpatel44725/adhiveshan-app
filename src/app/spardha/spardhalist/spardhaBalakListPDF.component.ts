@@ -113,7 +113,7 @@ export class SpardhaDetail implements OnInit {
         submitMarks.marks = {}
 
         for (let i = 0; i < this.spardhaBalakList.spardha_balaks.length; i++) {
-            if (this.spardhaBalakList.spardha_balaks[i].mark_marks > 0 && this.spardhaBalakList.spardha_balaks[i].mark_marks < 101) {
+            if (this.spardhaBalakList.spardha_balaks[i].mark_marks >= 0) { // && this.spardhaBalakList.spardha_balaks[i].mark_marks <= 300
                 submitMarks.marks[this.spardhaBalakList.spardha_balaks[i].bal_id]=this.spardhaBalakList.spardha_balaks[i].mark_marks;
             }
         }
@@ -167,7 +167,7 @@ export class SpardhaDetail implements OnInit {
             let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
             var position = 0;
             pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-            pdf.save(this.spardhaBalakList.spardha_info.slot_spardha + 'Detail.pdf');
+            pdf.save(this.spardhaBalakList.spardha_info.slot_spardha+'_'+this.spardhaBalakList.spardha_info.slot_id+ '_Detail.pdf');
             
         });
     }
